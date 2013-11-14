@@ -6,7 +6,7 @@
         <property name="codigoEntidadBancaria"    column="codigoEntidad"  />
         <property name="nombre" />
         <property name="cif" />
-        <property column="tipoEntidadBancaria" name="tipo">
+        <property column="tipo" name="tipo">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">com.fpmislata.banco.modelo.TipoEntidadBancaria</param>
                 <param name="type">12</param>
