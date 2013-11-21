@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="com.fpmislata.banco" default="default" basedir=".">
-    <description>Builds, tests, and runs the project com.fpmislata.banco.</description>
+<project name="Banco" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Banco.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
