@@ -4,7 +4,6 @@
  */
 package com.fpmislata.banco.datos;
 
-import com.fpmislata.banco.modelo.EntidadBancaria;
 import java.util.List;
 
 /**
