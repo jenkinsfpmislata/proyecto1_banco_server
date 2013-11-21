@@ -14,7 +14,6 @@
     EntidadBancaria entidadBancaria = new EntidadBancaria();
     EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
     
-    entidadBancaria.setIdEntidad(1224);
     entidadBancaria.setNombre(request.getParameter("nombre"));
     entidadBancaria.setCif(request.getParameter("cif"));
     entidadBancaria.setCodigoEntidadBancaria(request.getParameter("codigo"));
