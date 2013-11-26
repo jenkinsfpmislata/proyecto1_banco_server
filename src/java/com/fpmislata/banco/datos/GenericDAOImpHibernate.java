@@ -31,7 +31,7 @@ public class GenericDAOImpHibernate<T, ID> implements GenericDAO<T, ID> {
     @Override
     public T read(ID id) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
 
@@ -42,7 +42,7 @@ public class GenericDAOImpHibernate<T, ID> implements GenericDAO<T, ID> {
 
     @Override
     public void insert(T tipo) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
         session.save(tipo); //<|--- Aqui guardamos el objeto en la base de datos.
@@ -52,7 +52,7 @@ public class GenericDAOImpHibernate<T, ID> implements GenericDAO<T, ID> {
 
     @Override
     public void update(T tipo) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
         session.update(tipo); //<|--- Aqui guardamos el objeto en la base de datos.
@@ -72,7 +72,7 @@ public class GenericDAOImpHibernate<T, ID> implements GenericDAO<T, ID> {
 
     @Override
     public List<T> findAll() {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         Query query = session.createQuery("SELECT entidadBancaria FROM EntidadBancaria entidadBancaria");
