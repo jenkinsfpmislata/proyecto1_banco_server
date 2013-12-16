@@ -4,7 +4,6 @@
  */
 package com.fpmislata.banco.datos;
 
-import com.fpmislata.banco.modelo.EntidadBancaria;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -17,8 +16,8 @@ import org.hibernate.SessionFactory;
  * @author alumno
  */
 public class GenericDAOImpHibernate<T, ID> implements GenericDAO<T, ID> {
-
-    SessionFactory sessionFactory;
+    
+     SessionFactory sessionFactory;
 
     public GenericDAOImpHibernate() {
         this.sessionFactory = HibernateUtil.getSessionFactory();

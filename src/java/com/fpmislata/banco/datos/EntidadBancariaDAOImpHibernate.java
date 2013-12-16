@@ -8,7 +8,6 @@ import com.fpmislata.banco.modelo.EntidadBancaria;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  *
@@ -17,7 +16,7 @@ import org.hibernate.SessionFactory;
 public class EntidadBancariaDAOImpHibernate extends GenericDAOImpHibernate<EntidadBancaria,Integer> implements EntidadBancariaDAO{
 
     @Override
-            public List<EntidadBancaria> findByCodigo(String codigo) {
+        public List<EntidadBancaria> findByCodigo(String codigo) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 

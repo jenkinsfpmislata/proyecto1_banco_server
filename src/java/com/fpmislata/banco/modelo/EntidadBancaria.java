@@ -7,6 +7,8 @@ package com.fpmislata.banco.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -15,8 +17,12 @@ import java.util.List;
 public class EntidadBancaria implements Serializable{
 
     private int idEntidad;
+    @NotNull
+    @Size(min = 4, max = 4)
     private String codigoEntidadBancaria;
     private String nombre;
+    @NotNull
+    @Size(min = 4, max = 9)
     private String cif;
     private TipoEntidadBancaria tipo;
     private List<SucursalBancaria> ListaSucursalBancaria = new ArrayList();

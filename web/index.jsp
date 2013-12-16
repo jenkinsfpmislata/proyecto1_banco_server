@@ -41,7 +41,9 @@
                         String nombre = entidadBancaria.getNombre();
                         String cif = entidadBancaria.getCif(); 
                         int idEntidadBancaria = entidadBancaria.getIdEntidad();
+                        int id = entidadBancaria.getIdEntidad();
                 %> 
+                <td> <%=id%> </td>
                 <td> <%=nombre%> </td>
                 <td> <%=cif%> </td>
                 <td> <a href="actualizar.jsp?idEntidadBancaria=<%=idEntidadBancaria%>" name="actualizar" class="btn btn-info"> Actualizar </a></td>
