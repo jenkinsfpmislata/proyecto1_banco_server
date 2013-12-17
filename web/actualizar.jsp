@@ -7,9 +7,9 @@
 <%
     EntidadBancaria entidadBancaria;
     EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
-    int idEntidadBancaria = Integer.parseInt(request.getParameter("idEntidadBancaria"));
-    entidadBancaria = entidadBancariaDAO.read(idEntidadBancaria);
-
+    entidadBancaria = entidadBancariaDAO.read(Integer.parseInt(request.getParameter("idEntidadBancaria")));
+    
+    int idEntidadBancaria = entidadBancaria.getIdEntidad();
     String nombre = entidadBancaria.getNombre();
     String codigo = entidadBancaria.getCodigoEntidadBancaria();
     String cif = entidadBancaria.getCif();
@@ -23,18 +23,20 @@
     </head>
     <body>
         <h2> Inserta los datos de la entidad bancaria que quieras modificar </h2>
-        <form action="update.jsp?idEntidadBancaria=<%=idEntidadBancaria%>">
+        <form action="update.jsp">
+            ID: <input type="text" name="idEntidadBancaria" value="<%=idEntidadBancaria%>" disabled><br/>
             Nombre: <input type="text" name="nombre" value="<%=nombre%>"><br/>        
             Codigo: <input type="text" name="codigo" value="<%=codigo%>"><br/>
             CIF: <input type="text" name="cif" value="<%=cif%>"><br/>   
             Tipo de entidad: 
-           <select name="tipo">
+            <select name="tipo">
                 <option value="cooperativaCredito"> cooperativaCredito </option>
                 <option value="banco"> banco </option>
                 <option value="cajaAhorro"> cajaAhorro </option>
                 <option value="establecimientoFinancierodecredito"> establecimientoFinancierodecredito </option>
             </select><br/> 
-            <input type="submit" value="Insertar" name="subir"/>
+            <input type="submit" value="Insertar"/> 
         </form>
+            <a href="index.jsp">Volver</a>
     </body>
 </html>

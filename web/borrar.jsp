@@ -21,5 +21,6 @@
     </head>
     <body>
     <h1> Tu entidad bancaria ha sido borrada </h1>
+    <a href="index.jsp">Volver</a>
     </body>
 </html>

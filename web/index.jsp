@@ -27,12 +27,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form method="GET" action="index.jsp">
-            Nombre: <input type="text" value="" name="nombre" class="text text-success">
-            <br/>
-            <input type="submit" value="Enviar" name="botonEnviar">
-        </form>
-        <a href="nuevo.jsp" name="nuevo" class="btn btn-info">Nuevo</a>
+        <a href="nuevo.jsp" name="nuevo" class="btn btn-info">Nueva entidad bancaria</a>
 
         <table class="table table-striped table-hover">
             <tr>
@@ -42,15 +37,16 @@
                         String cif = entidadBancaria.getCif(); 
                         int idEntidadBancaria = entidadBancaria.getIdEntidad();
                         int id = entidadBancaria.getIdEntidad();
+                        TipoEntidadBancaria tipo = entidadBancaria.getTipo();
                 %> 
                 <td> <%=id%> </td>
                 <td> <%=nombre%> </td>
                 <td> <%=cif%> </td>
-                <td> <a href="actualizar.jsp?idEntidadBancaria=<%=idEntidadBancaria%>" name="actualizar" class="btn btn-info"> Actualizar </a></td>
-                <td> <a href="borrar.jsp?idEntidadBancaria=<%=idEntidadBancaria%>" name="borrar" class="btn btn-info"> Borrar </a>
+                <td> <%=tipo.name()%> </td>
+                <td> <a href="actualizar.jsp?idEntidadBancaria=<%=idEntidadBancaria%>" name="actualizar" class="btn btn-success"> Actualizar </a></td>
+                <td> <a href="borrar.jsp?idEntidadBancaria=<%=idEntidadBancaria%>" name="borrar" class="btn btn-danger"> Borrar </a>
             </tr>
             <% }%>
         </table>
-        <a href="http://www.google.es" class="btn btn-danger"> Google </a>
     </body>
 </html>

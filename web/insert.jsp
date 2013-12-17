@@ -28,5 +28,6 @@
     </head>
     <body>
         <h1>Entidad bancaria insertada con exito en la BD</h1>
+        <a href="index.jsp">Volver</a>
     </body>
 </html>
