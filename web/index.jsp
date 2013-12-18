@@ -28,7 +28,7 @@
     </head>
     <body>
         <a href="nuevo.jsp" name="nuevo" class="btn btn-info">Nueva entidad bancaria</a>
-
+        <a href="http://localhost:8080/BancoConAngularJS/index.html" name="angular" class="btn btn-info">Angular</a>
         <table class="table table-striped table-hover">
             <tr>
                 <%
