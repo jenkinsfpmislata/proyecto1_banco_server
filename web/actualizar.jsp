@@ -21,11 +21,11 @@
     </head>
     <body>
         <h2> Inserta los datos de la entidad bancaria que quieras modificar </h2>
-        <form action="update.jsp" id="formulario">
-            ID: <input type="text" name="idEntidadBancaria" id="idEntidadBancaria" value="<%=idEntidadBancaria%>" readonly><br/>
-            Nombre: <input type="text" name="nombre" id="nombre" value="<%=nombre%>"><br/>        
-            Codigo: <input type="text" name="codigo" id="codigo" value="<%=codigo%>"><br/>
-            CIF: <input type="text" name="cif" id="cif" value="<%=cif%>"><br/>   
+        <form action="update.jsp">
+            ID: <input type="text" name="idEntidadBancaria" value="<%=idEntidadBancaria%>" readonly><br/>
+            Nombre: <input type="text" name="nombre" value="<%=nombre%>"><br/>        
+            Codigo: <input type="text" name="codigo" value="<%=codigo%>"><br/>
+            CIF: <input type="text" name="cif" value="<%=cif%>"><br/>   
             Tipo de entidad: 
             <select name="tipo">
                 <option value="cooperativaCredito"> cooperativaCredito </option>
