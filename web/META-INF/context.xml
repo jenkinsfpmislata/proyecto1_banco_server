@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" path="/Banco">
-  <Resource name="jdbc/banco" auth="Container"
+  <Resource name="jdbc/Banco" auth="Container"
             type="javax.sql.DataSource"
             driverClassName="com.mysql.jdbc.Driver" 
-            url="jdbc:mysql://localhost:3306/banco"
+            url="jdbc:mysql://localhost/proyecto1_banco"
             username="root"
-            password="root"
+            password="frodo2013"
             initialSize="2"
             maxActive="10" 
             maxIdle="5" 
