@@ -5,7 +5,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
-    EntidadBancaria entidadBancaria = entidadBancariaDAO.read(Integer.parseInt(request.getParameter("idEntidadBancaria")));
+    int idEntidadBancaria = Integer.parseInt(request.getParameter("idEntidadBancaria"));
+    EntidadBancaria entidadBancaria = entidadBancariaDAO.read(idEntidadBancaria);
     
     entidadBancaria.setNombre(request.getParameter("nombre"));
     entidadBancaria.setCodigoEntidadBancaria(request.getParameter("codigo"));
