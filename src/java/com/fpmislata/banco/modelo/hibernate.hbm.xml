@@ -3,7 +3,7 @@
 <hibernate-mapping>
     <class name="com.fpmislata.banco.modelo.EntidadBancaria" table="entidadBancaria" >
         <id name="idEntidad"  type="integer"/>
-        <property name="codigoEntidadBancaria"    column="codigoEntidad"  />
+        <property name="codigoEntidadBancaria"  column="codigoEntidad"  />
         <property name="nombre" />
         <property name="cif" />
         <property column="tipoEntidadBancaria" name="tipo">
