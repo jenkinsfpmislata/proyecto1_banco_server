@@ -27,9 +27,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="nuevo.jsp" name="nuevo" class="btn btn-info">Nueva entidad bancaria</a>
-
+        <a href="nuevo.jsp" name="nuevo" class="btn btn-info">Nueva entidad bancaria</a><br/>
+        
         <table class="table table-striped table-hover">
+            <tr>
+                <td>ID</td>
+                <td>Nombre</td>
+                <td>Codigo</td>
+                <td>CIF</td>
+                <td>Tipo</td>
+                <td></td>
+                <td></td>
+            </tr>
             <tr>
                 <%
                     for (EntidadBancaria entidadBancaria : entidadBancariaHibernate.findAll()) {
@@ -37,10 +46,12 @@
                         String cif = entidadBancaria.getCif(); 
                         int idEntidadBancaria = entidadBancaria.getIdEntidad();
                         int id = entidadBancaria.getIdEntidad();
+                        String codigoEntidad = entidadBancaria.getCodigoEntidadBancaria();
                         TipoEntidadBancaria tipo = entidadBancaria.getTipo();
                 %> 
                 <td> <%=id%> </td>
                 <td> <%=nombre%> </td>
+                <td> <%=codigoEntidad%> </td>
                 <td> <%=cif%> </td>
                 <td> <%=tipo.name()%> </td>
                 <td> <a href="actualizar.jsp?idEntidadBancaria=<%=idEntidadBancaria%>" name="actualizar" class="btn btn-success"> Actualizar </a></td>

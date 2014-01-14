@@ -11,5 +11,4 @@ import com.fpmislata.banco.modelo.CuentaBancaria;
  * @author alumno
  */
 public interface CuentaBancariaDAO extends GenericDAO<CuentaBancaria, Integer>{
-    
 }
