@@ -4,7 +4,7 @@
         entidadBancaria.setNombre(request.getParameter("nombre"));
         entidadBancaria.setCif(request.getParameter("cif"));
         entidadBancaria.setCodigoEntidadBancaria(request.getParameter("codigo"));
-        entidadBancaria.setTipo(TipoEntidadBancaria.banco);
+        entidadBancaria.setTipo(TipoEntidadBancaria.valueOf(request.getParameter("tipo")));
         entidadBancariaDAO.insert(entidadBancaria);
         ObjectMapper jackson = new ObjectMapper();
         String json = jackson.writeValueAsString(null);

@@ -14,10 +14,10 @@
             CIF: <input type="text" name="cif" value=""><br/>   
             Tipo de entidad: 
            <select name="tipo">
-                <option value="cooperativaCredito"> cooperativaCredito </option>
-                <option value="banco"> banco </option>
-                <option value="cajaAhorro"> cajaAhorro </option>
-                <option value="establecimientoFinancierodecredito"> establecimientoFinancierodecredito </option>
+                <option value="COOPERATIVACREDITO"> cooperativaCredito </option>
+                <option value="BANCO"> banco </option>
+                <option value="CAJAAHORRO"> cajaAhorro </option>
+                <option value="ESTFINANCIEROCREDITO"> establecimientoFinancierodecredito </option>
             </select><br/> 
             <input type="submit" value="Insertar" name="subir"/>
         </form>

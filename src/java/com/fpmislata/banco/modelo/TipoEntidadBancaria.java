@@ -9,5 +9,5 @@ package com.fpmislata.banco.modelo;
  * @author alumno
  */
 public enum TipoEntidadBancaria {
-   banco,cajaAhorro,cooperativaCredito,establecimientoFinancierodecredito; 
+   BANCO,CAJAAHORRO,COOPERATIVACREDITO,ESTFINANCIEROCREDITO; 
 }
