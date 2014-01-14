@@ -10,7 +10,7 @@
     <!--Permite usar entre otras la anotación @Autowired -->
     <context:annotation-config/>
     <!--Permite usar entre otras las anotaciones @Component y @Controller -->
-    <context:component-scan base-package="com.fpmislata.daw2.banco.datos"/>
+    <context:component-scan base-package="com.fpmislata.banco.datos"/>
  
  
     <bean class="com.fpmislata.banco.datos.HibernateUtil" factory-method="getSessionFactory"  />

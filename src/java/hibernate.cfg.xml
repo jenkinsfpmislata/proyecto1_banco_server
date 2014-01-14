@@ -5,6 +5,9 @@
     <property name="hibernate.connection.datasource">java:/comp/env/jdbc/banco</property>
     <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
     <property name="hibernate.show_sql">true</property>
-    <mapping resource="com/fpmislata/banco/modelo/hibernate.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/modelo/EntidadBancaria.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/modelo/SucursalBancaria.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/modelo/CuentaBancaria.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/modelo/MovimientoBancario.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
