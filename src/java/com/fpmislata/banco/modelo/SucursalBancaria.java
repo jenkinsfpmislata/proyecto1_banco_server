@@ -14,9 +14,9 @@ import java.util.List;
 public class SucursalBancaria {
 
     private int idSucursalBancaria;
-    private EntidadBancaria entidad;
+    private EntidadBancaria entidadBancaria;
     private String codigoSucursal;
-    private String nombre;
+    private String nombreSucursal;
     private List<CuentaBancaria> ListaCuentaBancaria = new ArrayList();
 
     public SucursalBancaria() {
@@ -30,12 +30,12 @@ public class SucursalBancaria {
         this.idSucursalBancaria = idSucursalBancaria;
     }
 
-    public EntidadBancaria getEntidad() {
-        return entidad;
+    public EntidadBancaria getEntidadBancaria() {
+        return entidadBancaria;
     }
 
-    public void setEntidad(EntidadBancaria entidad) {
-        this.entidad = entidad;
+    public void setEntidadBancaria(EntidadBancaria entidadBancaria) {
+        this.entidadBancaria = entidadBancaria;
     }
 
     public String getCodigoSucursal() {
@@ -46,12 +46,12 @@ public class SucursalBancaria {
         this.codigoSucursal = codigoSucursal;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreSucursal() {
+        return nombreSucursal;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreSucursal(String nombreSucursal) {
+        this.nombreSucursal = nombreSucursal;
     }
 
     public List<CuentaBancaria> getListaCuentaBancaria() {

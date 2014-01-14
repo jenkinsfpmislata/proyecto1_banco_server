@@ -114,11 +114,11 @@ public class MovimientosBancariosController {
 
             movimientoBancarioUpdate.setIdMovimientoBancario(movimientoBancario.getIdMovimientoBancario());
             movimientoBancarioUpdate.setConcepto(movimientoBancario.getConcepto());
-            movimientoBancarioUpdate.setCuenta(movimientoBancario.getCuenta());
+            movimientoBancarioUpdate.setCuentaBancaria(movimientoBancario.getCuentaBancaria());
             movimientoBancarioUpdate.setFecha(movimientoBancario.getFecha());
             movimientoBancarioUpdate.setImporte(movimientoBancario.getImporte());
             movimientoBancarioUpdate.setSaldoTotal(movimientoBancario.getSaldoTotal());
-            movimientoBancarioUpdate.setTipoMovimiento(movimientoBancario.getTipoMovimiento());
+            movimientoBancarioUpdate.setTipoMovimientoBancario(movimientoBancario.getTipoMovimientoBancario());
 
             movimientoBancarioDAO.update(movimientoBancarioUpdate);
 

@@ -16,8 +16,8 @@ import java.util.List;
 public class MovimientoBancario {
 
     private int idMovimientoBancario;
-    private TipoMovimientoBancario tipoMovimiento;
-    private CuentaBancaria cuenta;
+    private TipoMovimientoBancario tipoMovimientoBancario;
+    private CuentaBancaria cuentaBancaria;
     private BigDecimal importe;
     private Date fecha;
     public BigDecimal saldoTotal;
@@ -34,12 +34,12 @@ public class MovimientoBancario {
         this.idMovimientoBancario = idMovimientoBancario;
     }
 
-    public TipoMovimientoBancario getTipoMovimiento() {
-        return tipoMovimiento;
+    public TipoMovimientoBancario getTipoMovimientoBancario() {
+        return tipoMovimientoBancario;
     }
 
-    public void setTipoMovimiento(TipoMovimientoBancario tipoMovimiento) {
-        this.tipoMovimiento = tipoMovimiento;
+    public void setTipoMovimientoBancario(TipoMovimientoBancario tipoMovimientoBancario) {
+        this.tipoMovimientoBancario = tipoMovimientoBancario;
     }
 
     public Date getFecha() {
@@ -58,12 +58,12 @@ public class MovimientoBancario {
         this.concepto = concepto;
     }
 
-    public CuentaBancaria getCuenta() {
-        return cuenta;
+    public CuentaBancaria getCuentaBancaria() {
+        return cuentaBancaria;
     }
 
-    public void setCuenta(CuentaBancaria cuenta) {
-        this.cuenta = cuenta;
+    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
     }
 
     public BigDecimal getImporte() {

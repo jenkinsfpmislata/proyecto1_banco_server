@@ -114,8 +114,8 @@ public class SucursalesBancariasController {
 
             SucursalBancariaUpdate.setIdSucursalBancaria(sucursalBancaria.getIdSucursalBancaria());
             SucursalBancariaUpdate.setCodigoSucursal(sucursalBancaria.getCodigoSucursal());
-            SucursalBancariaUpdate.setEntidad(sucursalBancaria.getEntidad());
-            SucursalBancariaUpdate.setNombre(sucursalBancaria.getNombre());
+            SucursalBancariaUpdate.setEntidadBancaria(sucursalBancaria.getEntidadBancaria());
+            SucursalBancariaUpdate.setNombreSucursal(sucursalBancaria.getNombreSucursal());
             SucursalBancariaUpdate.setListaCuentaBancaria(sucursalBancaria.getListaCuentaBancaria());
 
             sucursalBancariaDAO.update(SucursalBancariaUpdate);
