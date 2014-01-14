@@ -57,7 +57,7 @@ public class CuentasBancariasController {
 
     }
 
-    @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}"}, method = RequestMethod.DELETE)
+    @RequestMapping(value = {"/CuentasBancarias/{idCuentaBancaria}"}, method = RequestMethod.DELETE)
     public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
             cuentaBancariaDAO.delete(idCuentaBancaria);
