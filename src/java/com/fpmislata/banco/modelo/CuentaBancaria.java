@@ -4,11 +4,8 @@
  */
 package com.fpmislata.banco.modelo;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -19,7 +16,7 @@ public class CuentaBancaria {
     private SucursalBancaria sucursalBancaria;
     private String numeroCuenta;
     private String dc;
-    private BigDecimal saldo;
+    private double saldo;
     private String cif;
     private List <MovimientoBancario> ListaMovimientoBancario = new ArrayList();
     
@@ -59,11 +56,11 @@ public class CuentaBancaria {
         this.dc = dc;
     }
 
-    public BigDecimal getSaldo() {
+    public Double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(BigDecimal saldo) {
+    public void setSaldo(Double saldo) {
         this.saldo = saldo;
     }
 
