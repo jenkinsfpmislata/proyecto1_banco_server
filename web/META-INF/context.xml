@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" path="/Banco">
-  <Resource name="jdbc/Banco" auth="Container"
+  <Resource name="jdbc/proyecto1_banco_servidor" auth="Container"
             type="javax.sql.DataSource"
             driverClassName="com.mysql.jdbc.Driver" 
             url="jdbc:mysql://localhost/proyecto1_banco_servidor"
