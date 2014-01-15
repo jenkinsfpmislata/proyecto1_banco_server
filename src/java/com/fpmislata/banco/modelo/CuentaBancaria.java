@@ -4,7 +4,6 @@
  */
 package com.fpmislata.banco.modelo;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class CuentaBancaria {
     private SucursalBancaria sucursalBancaria;
     private String numeroCuenta;
     private String dc;
-    private BigDecimal saldo;
+    private double saldo;
     private String cif;
     private List <MovimientoBancario> ListaMovimientoBancario = new ArrayList();
     
@@ -25,20 +24,20 @@ public class CuentaBancaria {
         
     }
 
-    public int getCuentaBancaria() {
+    public int getIdCuentaBancaria() {
         return idCuentaBancaria;
     }
 
-    public void setCuentaBancaria(int CuentaBancaria) {
-        this.idCuentaBancaria = CuentaBancaria;
+    public void setIdCuentaBancaria(int idCuentaBancaria) {
+        this.idCuentaBancaria = idCuentaBancaria;
     }
 
-    public SucursalBancaria getSucursal() {
+    public SucursalBancaria getSucursalBancaria() {
         return sucursalBancaria;
     }
 
-    public void setSucursal(SucursalBancaria sucursal) {
-        this.sucursalBancaria = sucursal;
+    public void setSucursalBancaria(SucursalBancaria sucursalBancaria) {
+        this.sucursalBancaria = sucursalBancaria;
     }
 
     public String getNumeroCuenta() {
@@ -57,28 +56,12 @@ public class CuentaBancaria {
         this.dc = dc;
     }
 
-    public String getCifCuenta() {
-        return cif;
-    }
-
-    public void setCifCuenta(String cifCuenta) {
-        this.cif = cifCuenta;
-    }
-
-    public BigDecimal getSaldo() {
+    public Double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(BigDecimal saldo) {
+    public void setSaldo(Double saldo) {
         this.saldo = saldo;
-    }
-
-    public SucursalBancaria getSucursalBancaria() {
-        return sucursalBancaria;
-    }
-
-    public void setSucursalBancaria(SucursalBancaria sucursalBancaria) {
-        this.sucursalBancaria = sucursalBancaria;
     }
 
     public String getCif() {
@@ -93,8 +76,10 @@ public class CuentaBancaria {
         return ListaMovimientoBancario;
     }
 
-    public void setMovimientoBancario(List<MovimientoBancario> ListaMovimientoBancario) {
+    public void setListaMovimientoBancario(List<MovimientoBancario> ListaMovimientoBancario) {
         this.ListaMovimientoBancario = ListaMovimientoBancario;
     }
+
+
     
 }

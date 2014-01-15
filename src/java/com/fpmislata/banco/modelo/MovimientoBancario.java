@@ -4,7 +4,6 @@
  */
 package com.fpmislata.banco.modelo;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,11 +15,11 @@ import java.util.List;
 public class MovimientoBancario {
 
     private int idMovimientoBancario;
-    private TipoMovimientoBancario tipoMovimiento;
-    private CuentaBancaria cuenta;
-    private BigDecimal importe;
+    private TipoMovimientoBancario tipoMovimientoBancario;
+    private CuentaBancaria cuentaBancaria;
+    private Double importe;
     private Date fecha;
-    public BigDecimal saldoTotal;
+    public Double saldoTotal;
     private String concepto;
 
     public MovimientoBancario() {
@@ -34,12 +33,12 @@ public class MovimientoBancario {
         this.idMovimientoBancario = idMovimientoBancario;
     }
 
-    public TipoMovimientoBancario getTipoMovimiento() {
-        return tipoMovimiento;
+    public TipoMovimientoBancario getTipoMovimientoBancario() {
+        return tipoMovimientoBancario;
     }
 
-    public void setTipoMovimiento(TipoMovimientoBancario tipoMovimiento) {
-        this.tipoMovimiento = tipoMovimiento;
+    public void setTipoMovimientoBancario(TipoMovimientoBancario tipoMovimientoBancario) {
+        this.tipoMovimientoBancario = tipoMovimientoBancario;
     }
 
     public Date getFecha() {
@@ -58,27 +57,27 @@ public class MovimientoBancario {
         this.concepto = concepto;
     }
 
-    public CuentaBancaria getCuenta() {
-        return cuenta;
+    public CuentaBancaria getCuentaBancaria() {
+        return cuentaBancaria;
     }
 
-    public void setCuenta(CuentaBancaria cuenta) {
-        this.cuenta = cuenta;
+    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
     }
 
-    public BigDecimal getImporte() {
+    public Double getImporte() {
         return importe;
     }
 
-    public void setImporte(BigDecimal importe) {
+    public void setImporte(Double importe) {
         this.importe = importe;
     }
 
-    public BigDecimal getSaldoTotal() {
+    public Double getSaldoTotal() {
         return saldoTotal;
     }
 
-    public void setSaldoTotal(BigDecimal saldoTotal) {
+    public void setSaldoTotal(Double saldoTotal) {
         this.saldoTotal = saldoTotal;
     }
 
