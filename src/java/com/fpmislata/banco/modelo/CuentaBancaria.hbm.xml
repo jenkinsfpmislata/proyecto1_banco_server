@@ -5,7 +5,9 @@
         <id column="idCuentaBancaria" name="idCuentaBancaria" type="integer">
             <generator class="identity" />
         </id>
-        <property name="sucursalBancaria" column="sucursalbancaria"  />
+        <many-to-one name="sucursalBancaria">
+             <column name="idsucursalbancaria"  />
+     </many-to-one>
         <property name="numeroCuenta" column="numeroCuenta" />
         <property name="dc" column="dc" />
         <property column="saldo" name="saldo" />

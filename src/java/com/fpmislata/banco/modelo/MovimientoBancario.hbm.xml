@@ -5,7 +5,9 @@
         <id column="idmovimientobancario" name="idMovimientoBancario" type="integer">
             <generator class="identity" />
         </id>
-        <property name="cuentaBancaria" column="cuentabancaria" />
+        <many-to-one name="cuentaBancaria">
+            <column name="idcuentabancaria"  />
+        </many-to-one>
         <property column="tipoMovimientobancario" name="tipoMovimientoBancario">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">com.fpmislata.banco.modelo.TipoMovimientoBancario</param>
