@@ -12,8 +12,7 @@ import java.util.List;
  *
  * @author alumno
  */
-@JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
-
+@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class CuentaBancaria {
     private int idCuentaBancaria;
     private SucursalBancaria sucursalBancaria;

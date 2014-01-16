@@ -6,9 +6,9 @@
             <generator class="identity" />
         </id>
        <many-to-one name="entidadBancaria">
-             <column name="identidadBancaria"  />
+             <column name="identidadBancaria"/>
      </many-to-one>
-        <property name="codigoSucursal" />
-        <property name="nombreSucursal" column="nombre" />
+        <property name="codigoSucursal" column="codigoSucursal"/>
+        <property name="nombreSucursal" column="nombreSucursal" />
     </class>
 </hibernate-mapping>

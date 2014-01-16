@@ -52,6 +52,27 @@ public class CuentasBancariasController {
             }
         }
     }
+    @RequestMapping(value = {"/CuentasBancarias"}, method = RequestMethod.GET)
+    public void readAll(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
+        try {
+            ObjectMapper jackson = new ObjectMapper();
+            String json = jackson.writeValueAsString(cuentaBancariaDAO.findAll());
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+
+            httpServletResponse.getWriter().println(json);
+
+        } catch (Exception ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                ex.printStackTrace(httpServletResponse.getWriter());
+            } catch (Exception ex1) {
+            }
+        }
+
+
+    }
 
     @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.DELETE)
     public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
