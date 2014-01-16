@@ -74,7 +74,7 @@ public class GenericDAOImpHibernate<T, ID> implements GenericDAO<T, ID> {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("SELECT entidadBancaria FROM EntidadBancaria entidadBancaria");
+        Query query = session.createQuery("SELECT t FROM "+getEntityClass().getName()+" t");
 
         List<T> objectList = query.list();
 
