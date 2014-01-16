@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.fpmislata.banco.modelo.MovimientoBancario" table="movimientoBancario" >
-        <id column="idmovimientobancario" name="idMovimientoBancario" type="integer">
+    <class name="com.fpmislata.banco.modelo.MovimientoBancario" table="movimientobancario" >
+        <id column="idMovimientoBancario" name="idMovimientoBancario" type="integer">
             <generator class="identity" />
         </id>
         <many-to-one name="cuentaBancaria">
-            <column name="idcuentabancaria"  />
+            <column name="idCuentaBancaria"  />
         </many-to-one>
-        <property column="tipoMovimientobancario" name="tipoMovimientoBancario">
+        <property column="tipoMovimientoBancario" name="tipoMovimientoBancario">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">com.fpmislata.banco.modelo.TipoMovimientoBancario</param>
                 <param name="type">12</param>

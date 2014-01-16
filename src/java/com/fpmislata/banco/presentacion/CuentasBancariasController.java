@@ -33,7 +33,7 @@ public class CuentasBancariasController {
     @Autowired
     private CuentaBancariaDAO cuentaBancariaDAO;
 
-    @RequestMapping(value = {"/CuentasBancarias/{idCuentaBancaria}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.GET)
     public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
             ObjectMapper jackson = new ObjectMapper();
@@ -55,7 +55,7 @@ public class CuentasBancariasController {
 
     }
 
-    @RequestMapping(value = {"/CuentasBancarias/{idCuentaBancaria}"}, method = RequestMethod.DELETE)
+    @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.DELETE)
     public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
             cuentaBancariaDAO.delete(idCuentaBancaria);
