@@ -4,6 +4,7 @@
  */
 package com.fpmislata.banco.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import java.util.List;
  *
  * @author alumno
  */
+@JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
+
 public class SucursalBancaria {
 
     private int idSucursalBancaria;

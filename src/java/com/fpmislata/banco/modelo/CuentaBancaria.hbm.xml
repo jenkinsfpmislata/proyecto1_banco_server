@@ -6,7 +6,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="sucursalBancaria">
-             <column name="idsucursalbancaria"  />
+             <column name="idSucursalBancaria"  />
      </many-to-one>
         <property name="numeroCuenta" column="numeroCuenta" />
         <property name="dc" column="dc" />
