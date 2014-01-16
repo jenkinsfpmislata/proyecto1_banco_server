@@ -18,7 +18,7 @@ public class ConnectionFactoryImplDataSoruce implements ConnectionFactory{
     public Connection getConnection(){
         try{
             InitialContext initialContext = new InitialContext();          
-            datasource = (DataSource) initialContext.lookup("java:/comp/env/jdbc/banco");           
+            datasource = (DataSource) initialContext.lookup("java:/comp/env/jdbc/proyecto1_banco_servidor");           
 
         return datasource.getConnection();
         }catch(Exception ex){
