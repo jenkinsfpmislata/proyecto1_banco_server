@@ -68,4 +68,12 @@
     nbproject/build-impl.xml file. 
 
     -->
+    
+    <target name="-pre-dist">
+        <javadoc sourcepath="src/java" destdir="dist/javadoc" />
+        <property file="nbproject/proyecto1_banco_servidor.properties"/>
+            
+    </target>
+    
+    
 </project>
