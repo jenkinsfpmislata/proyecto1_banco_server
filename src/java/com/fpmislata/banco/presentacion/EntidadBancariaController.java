@@ -33,11 +33,11 @@ public class EntidadBancariaController {
     @Autowired
     private EntidadBancariaDAO entidadBancariaDAO;
 
-    @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}"}, method = RequestMethod.GET)
-    public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
+    @RequestMapping(value = {"/EntidadBancaria/{nombre}"}, method = RequestMethod.GET)
+    public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("nombre") String nombre) {
         try {
             ObjectMapper jackson = new ObjectMapper();
-            String json = jackson.writeValueAsString(entidadBancariaDAO.read(idEntidadBancaria));
+            String json = jackson.writeValueAsString(entidadBancariaDAO.findByNombre(nombre));
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
 
