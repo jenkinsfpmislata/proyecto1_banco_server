@@ -11,7 +11,9 @@ import java.util.List;
  *
  * @author alumno
  */
-public interface SucursalBancariaDAO extends GenericDAO<SucursalBancaria, Integer>{
-        public List<SucursalBancaria> findByNombre(String nombreSucursal);
+public interface SucursalBancariaDAO extends GenericDAO<SucursalBancaria, Integer> {
 
+    public List<SucursalBancaria> findByNombre(String nombreSucursal);
+
+    public List<SucursalBancaria> findByEntidad(String idEntidad);
 }

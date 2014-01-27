@@ -29,5 +29,18 @@ public class SucursalBancariaDAOImpHibernate extends GenericDAOImpHibernate<Sucu
         session.getTransaction().commit();
         return sucursalesBancarias;
     }
+
+    @Override
+    public List<SucursalBancaria> findByEntidad(String idEntidad) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("SELECT sucursalBancaria FROM SucursalBancaria sucursalBancaria WHERE idEntidadBancaria = ?");
+        query.setString(0, idEntidad);
+        
+        List<SucursalBancaria> sucursalesBancarias = query.list();
+        
+        session.getTransaction().commit();
+        return sucursalesBancarias;    }
     
 }

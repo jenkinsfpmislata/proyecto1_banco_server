@@ -35,9 +35,14 @@ public class SucursalesBancariasController {
 
     @RequestMapping(value = {"/SucursalBancaria/{nombreSucursal}"}, method = RequestMethod.GET)
     public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("nombreSucursal") String nombreSucursal) {
+        ObjectMapper jackson = new ObjectMapper();
+        String json = null;
         try {
-            ObjectMapper jackson = new ObjectMapper();
-            String json = jackson.writeValueAsString(sucursalBancariaDAO.findByNombre(nombreSucursal));
+//            if(httpRequest.getParameter("nombre") != null){
+            json = jackson.writeValueAsString(sucursalBancariaDAO.findByNombre(nombreSucursal));
+//            }else{
+//            json = jackson.writeValueAsString(sucursalBancariaDAO.findAll());
+//            }
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
 
@@ -54,7 +59,8 @@ public class SucursalesBancariasController {
 
 
     }
-     @RequestMapping(value = {"/SucursalesBancarias"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/SucursalesBancarias"}, method = RequestMethod.GET)
     public void readAll(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
         try {
             ObjectMapper jackson = new ObjectMapper();
@@ -104,11 +110,11 @@ public class SucursalesBancariasController {
             ObjectMapper jackson = new ObjectMapper();
             System.out.println("No se ha podido insertar la Sucursal Bancaria debido a los siguientes errores:");
             for (ConstraintViolation constraintViolation : cve.getConstraintViolations()) {
-               String datos = constraintViolation.getPropertyPath().toString();
-               String mensage = constraintViolation.getMessage();
-               
-               BussinesMessage bussinesMessage = new BussinesMessage(datos,mensage);
-               errorList.add(bussinesMessage);
+                String datos = constraintViolation.getPropertyPath().toString();
+                String mensage = constraintViolation.getMessage();
+
+                BussinesMessage bussinesMessage = new BussinesMessage(datos, mensage);
+                errorList.add(bussinesMessage);
             }
             String jsonInsert = jackson.writeValueAsString(errorList);
             httpServletResponse.setStatus(httpServletResponse.SC_BAD_REQUEST);
@@ -143,6 +149,26 @@ public class SucursalesBancariasController {
 
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.getWriter().println(json);
+        } catch (Exception ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                ex.printStackTrace(httpServletResponse.getWriter());
+            } catch (Exception ex1) {
+            }
+        }
+    }
+
+    @RequestMapping(value = {"/SucursalesBancariasPorEntidad/{idEntidad}"}, method = RequestMethod.GET)
+    public void readSucursalesPorEntidad(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidad") String idEntidad) {
+        try {
+            ObjectMapper jackson = new ObjectMapper();
+            String json = jackson.writeValueAsString(sucursalBancariaDAO.findByEntidad(idEntidad));
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+
+            httpServletResponse.getWriter().println(json);
+
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");

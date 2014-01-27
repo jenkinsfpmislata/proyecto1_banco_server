@@ -33,15 +33,21 @@ public class EntidadBancariaController {
     @Autowired
     private EntidadBancariaDAO entidadBancariaDAO;
 
-    @RequestMapping(value = {"/EntidadBancaria/{nombre}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/EntidadBancaria"}, method = RequestMethod.GET)
     public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("nombre") String nombre) {
         try {
+            String json = null;
             ObjectMapper jackson = new ObjectMapper();
-            String json = jackson.writeValueAsString(entidadBancariaDAO.findByNombre(nombre));
+//            if (httpRequest.getParameter("nombre") != null) {
+                json = jackson.writeValueAsString(entidadBancariaDAO.findByNombre(nombre));
+//            } else {
+//                json = jackson.writeValueAsString(entidadBancariaDAO.findAll());
+//            }
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
 
             httpServletResponse.getWriter().println(json);
+
 
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -51,9 +57,8 @@ public class EntidadBancariaController {
             } catch (Exception ex1) {
             }
         }
-
-
     }
+
     @RequestMapping(value = {"/EntidadesBancarias"}, method = RequestMethod.GET)
     public void readAll(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
         try {
@@ -104,11 +109,11 @@ public class EntidadBancariaController {
             ObjectMapper jackson = new ObjectMapper();
             System.out.println("No se ha podido insertar la Entidad Bancaria debido a los siguientes errores:");
             for (ConstraintViolation constraintViolation : cve.getConstraintViolations()) {
-               String datos = constraintViolation.getPropertyPath().toString();
-               String mensage = constraintViolation.getMessage();
-               
-               BussinesMessage bussinesMessage = new BussinesMessage(datos,mensage);
-               errorList.add(bussinesMessage);
+                String datos = constraintViolation.getPropertyPath().toString();
+                String mensage = constraintViolation.getMessage();
+
+                BussinesMessage bussinesMessage = new BussinesMessage(datos, mensage);
+                errorList.add(bussinesMessage);
             }
             String jsonInsert = jackson.writeValueAsString(errorList);
             httpServletResponse.setStatus(httpServletResponse.SC_BAD_REQUEST);
