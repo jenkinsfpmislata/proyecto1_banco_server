@@ -21,7 +21,6 @@ public class MovimientoBancario {
     private CuentaBancaria cuentaBancaria;
     private Double importe;
     private Date fecha;
-    public Double saldoTotal;
     private String concepto;
 
     public MovimientoBancario() {
@@ -73,14 +72,6 @@ public class MovimientoBancario {
 
     public void setImporte(Double importe) {
         this.importe = importe;
-    }
-
-    public Double getSaldoTotal() {
-        return saldoTotal;
-    }
-
-    public void setSaldoTotal(Double saldoTotal) {
-        this.saldoTotal = saldoTotal;
     }
 
 }

@@ -16,7 +16,6 @@
         </property>
         <property name="importe" column="importe" />
         <property name="fecha" column="fecha" />
-        <property name="saldoTotal" column="saldoTotal" />
         <property name="concepto" column="concepto" />
     </class>
 </hibernate-mapping>
