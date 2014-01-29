@@ -33,16 +33,12 @@ public class EntidadBancariaController {
     @Autowired
     private EntidadBancariaDAO entidadBancariaDAO;
 
-    @RequestMapping(value = {"/EntidadBancaria"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/EntidadBancaria/{nombre}"}, method = RequestMethod.GET)
     public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("nombre") String nombre) {
         try {
             String json = null;
             ObjectMapper jackson = new ObjectMapper();
-//            if (httpRequest.getParameter("nombre") != null) {
                 json = jackson.writeValueAsString(entidadBancariaDAO.findByNombre(nombre));
-//            } else {
-//                json = jackson.writeValueAsString(entidadBancariaDAO.findAll());
-//            }
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
 
@@ -157,4 +153,26 @@ public class EntidadBancariaController {
             }
         }
     }
+    
+  @RequestMapping(value = {"/EntidadBancaria/id/{idEntidad}"}, method = RequestMethod.GET)
+    public void readID(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidad") int idEntidad) {
+        try {
+            String json = null;
+            ObjectMapper jackson = new ObjectMapper();
+                json = jackson.writeValueAsString(entidadBancariaDAO.read(idEntidad));
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+
+            httpServletResponse.getWriter().println(json);
+
+
+        } catch (Exception ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                ex.printStackTrace(httpServletResponse.getWriter());
+            } catch (Exception ex1) {
+            }
+        }
+    }  
 }
