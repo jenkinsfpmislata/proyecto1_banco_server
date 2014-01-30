@@ -34,7 +34,7 @@ public class SucursalesBancariasController {
     private SucursalBancariaDAO sucursalBancariaDAO;
 
     @RequestMapping(value = {"/SucursalBancaria/{nombreSucursal}"}, method = RequestMethod.GET)
-    public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("nombreSucursal") String nombreSucursal) {
+    public void readByName(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("nombreSucursal") String nombreSucursal) {
         ObjectMapper jackson = new ObjectMapper();
         String json = null;
         try {
@@ -203,4 +203,30 @@ public class SucursalesBancariasController {
       private void noCache(HttpServletResponse httpServletResponse){
       httpServletResponse.setHeader("Cache-Control", "no-cache");
   }
+    @RequestMapping(value = {"/SucursalBancaria/id/{idSucursalBancaria}"}, method = RequestMethod.GET)
+    public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria) {
+        ObjectMapper jackson = new ObjectMapper();
+        String json = null;
+        try {
+            json = jackson.writeValueAsString(sucursalBancariaDAO.read(idSucursalBancaria));
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            noCache(httpServletResponse);
+            httpServletResponse.getWriter().println(json);
+
+        } catch (Exception ex) {
+            noCache(httpServletResponse);
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                noCache(httpServletResponse);
+                ex.printStackTrace(httpServletResponse.getWriter());
+            } catch (Exception ex1) {
+                noCache(httpServletResponse);
+            }
+        }
+
+
+    }
 }
