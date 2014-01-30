@@ -178,7 +178,7 @@ public class SucursalesBancariasController {
         }
     }
 
-    @RequestMapping(value = {"/SucursalesBancariasPorEntidad/{idEntidad}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/EntidadBancaria/{idEntidad}/SucursalesBancarias"}, method = RequestMethod.GET)
     public void readSucursalesPorEntidad(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidad") String idEntidad) {
         try {
             ObjectMapper jackson = new ObjectMapper();
