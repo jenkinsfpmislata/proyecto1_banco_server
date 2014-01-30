@@ -38,7 +38,7 @@ public class EntidadBancariaController {
         try {
             String json = null;
             ObjectMapper jackson = new ObjectMapper();
-                json = jackson.writeValueAsString(entidadBancariaDAO.findByNombre(nombre));
+            json = jackson.writeValueAsString(entidadBancariaDAO.findByNombre(nombre));
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             noCache(httpServletResponse);
@@ -63,6 +63,7 @@ public class EntidadBancariaController {
         try {
             ObjectMapper jackson = new ObjectMapper();
             String json = jackson.writeValueAsString(entidadBancariaDAO.findAll());
+            
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             noCache(httpServletResponse);
@@ -171,13 +172,13 @@ public class EntidadBancariaController {
             }
         }
     }
-    
-  @RequestMapping(value = {"/EntidadBancaria/id/{idEntidad}"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/EntidadBancaria/id/{idEntidad}"}, method = RequestMethod.GET)
     public void readID(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidad") int idEntidad) {
         try {
             String json = null;
             ObjectMapper jackson = new ObjectMapper();
-                json = jackson.writeValueAsString(entidadBancariaDAO.read(idEntidad));
+            json = jackson.writeValueAsString(entidadBancariaDAO.read(idEntidad));
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             noCache(httpServletResponse);
@@ -195,9 +196,9 @@ public class EntidadBancariaController {
                 noCache(httpServletResponse);
             }
         }
-    }  
-  
-  private void noCache(HttpServletResponse httpServletResponse){
-      httpServletResponse.setHeader("Cache-Control", "no-cache");
-  }
+    }
+
+    private void noCache(HttpServletResponse httpServletResponse) {
+        httpServletResponse.setHeader("Cache-Control", "no-cache");
+    }
 }

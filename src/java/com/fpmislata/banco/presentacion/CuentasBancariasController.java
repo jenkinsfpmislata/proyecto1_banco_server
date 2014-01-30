@@ -41,7 +41,7 @@ public class CuentasBancariasController {
             noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-
+            noCache(httpServletResponse);
             httpServletResponse.getWriter().println(json);
 
         } catch (Exception ex) {
