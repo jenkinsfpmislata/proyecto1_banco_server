@@ -40,15 +40,18 @@ public class MovimientosBancariosController {
             String json = jackson.writeValueAsString(movimientoBancarioDAO.read(idMovimientoBancario));
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-
+            noCache(httpServletResponse);
             httpServletResponse.getWriter().println(json);
 
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
 
@@ -57,19 +60,23 @@ public class MovimientosBancariosController {
     @RequestMapping(value = {"/MovimientosBancarios"}, method = RequestMethod.GET)
     public void readAll(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
         try {
+            
             ObjectMapper jackson = new ObjectMapper();
             String json = jackson.writeValueAsString(movimientoBancarioDAO.findAll());
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-
+            noCache(httpServletResponse);
             httpServletResponse.getWriter().println(json);
 
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
 
@@ -80,13 +87,17 @@ public class MovimientosBancariosController {
     public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idMovimientoBancario") int idMovimientoBancario) {
         try {
             movimientoBancarioDAO.delete(idMovimientoBancario);
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
@@ -98,6 +109,7 @@ public class MovimientosBancariosController {
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             MovimientoBancario movimientoBancario = (MovimientoBancario) objectMapper.readValue(json, MovimientoBancario.class);
             movimientoBancarioDAO.insert(movimientoBancario);
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } catch (ConstraintViolationException cve) {
             List<BussinesMessage> errorList = new ArrayList();
@@ -111,13 +123,17 @@ public class MovimientosBancariosController {
                errorList.add(bussinesMessage);
             }
             String jsonInsert = jackson.writeValueAsString(errorList);
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(httpServletResponse.SC_BAD_REQUEST);
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
@@ -139,18 +155,24 @@ public class MovimientosBancariosController {
             movimientoBancarioUpdate.setTipoMovimientoBancario(movimientoBancario.getTipoMovimientoBancario());
 
             movimientoBancarioDAO.update(movimientoBancarioUpdate);
-
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
 
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.getWriter().println(json);
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
+      private void noCache(HttpServletResponse httpServletResponse){
+      httpServletResponse.setHeader("Cache-Control", "no-chache");
+  }
 }

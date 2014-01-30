@@ -45,15 +45,18 @@ public class SucursalesBancariasController {
 //            }
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-
+            noCache(httpServletResponse);
             httpServletResponse.getWriter().println(json);
 
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
 
@@ -67,15 +70,18 @@ public class SucursalesBancariasController {
             String json = jackson.writeValueAsString(sucursalBancariaDAO.findAll());
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-
+            noCache(httpServletResponse);
             httpServletResponse.getWriter().println(json);
 
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
 
@@ -86,13 +92,17 @@ public class SucursalesBancariasController {
     public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria) {
         try {
             sucursalBancariaDAO.delete(idSucursalBancaria);
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
@@ -104,6 +114,7 @@ public class SucursalesBancariasController {
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             SucursalBancaria sucursalBancaria = (SucursalBancaria) objectMapper.readValue(json, SucursalBancaria.class);
             sucursalBancariaDAO.insert(sucursalBancaria);
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } catch (ConstraintViolationException cve) {
             List<BussinesMessage> errorList = new ArrayList();
@@ -117,13 +128,17 @@ public class SucursalesBancariasController {
                 errorList.add(bussinesMessage);
             }
             String jsonInsert = jackson.writeValueAsString(errorList);
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(httpServletResponse.SC_BAD_REQUEST);
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
@@ -148,13 +163,17 @@ public class SucursalesBancariasController {
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
 
             httpServletResponse.setContentType("application/json; charset=UTF-8");
+            noCache(httpServletResponse);
             httpServletResponse.getWriter().println(json);
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
@@ -166,16 +185,22 @@ public class SucursalesBancariasController {
             String json = jackson.writeValueAsString(sucursalBancariaDAO.findByEntidad(idEntidad));
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-
+            noCache(httpServletResponse);
             httpServletResponse.getWriter().println(json);
 
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
+      private void noCache(HttpServletResponse httpServletResponse){
+      httpServletResponse.setHeader("Cache-Control", "no-chache");
+  }
 }

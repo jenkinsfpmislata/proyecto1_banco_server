@@ -41,16 +41,19 @@ public class EntidadBancariaController {
                 json = jackson.writeValueAsString(entidadBancariaDAO.findByNombre(nombre));
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-
+            noCache(httpServletResponse);
             httpServletResponse.getWriter().println(json);
 
 
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
@@ -62,15 +65,18 @@ public class EntidadBancariaController {
             String json = jackson.writeValueAsString(entidadBancariaDAO.findAll());
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-
+            noCache(httpServletResponse);
             httpServletResponse.getWriter().println(json);
 
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
 
@@ -81,13 +87,17 @@ public class EntidadBancariaController {
     public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
         try {
             entidadBancariaDAO.delete(idEntidadBancaria);
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
@@ -99,6 +109,7 @@ public class EntidadBancariaController {
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             EntidadBancaria entidadBancaria = (EntidadBancaria) objectMapper.readValue(json, EntidadBancaria.class);
             entidadBancariaDAO.insert(entidadBancaria);
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } catch (ConstraintViolationException cve) {
             List<BussinesMessage> errorList = new ArrayList();
@@ -112,13 +123,17 @@ public class EntidadBancariaController {
                 errorList.add(bussinesMessage);
             }
             String jsonInsert = jackson.writeValueAsString(errorList);
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(httpServletResponse.SC_BAD_REQUEST);
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
@@ -139,17 +154,20 @@ public class EntidadBancariaController {
             entidadBancariaUpdate.setListaSucursalBancaria(entidadBancaria.getListaSucursalBancaria());
 
             entidadBancariaDAO.update(entidadBancariaUpdate);
-
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
 
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.getWriter().println(json);
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }
@@ -162,17 +180,24 @@ public class EntidadBancariaController {
                 json = jackson.writeValueAsString(entidadBancariaDAO.read(idEntidad));
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-
+            noCache(httpServletResponse);
             httpServletResponse.getWriter().println(json);
 
 
         } catch (Exception ex) {
+            noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
+                noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (Exception ex1) {
+                noCache(httpServletResponse);
             }
         }
     }  
+  
+  private void noCache(HttpServletResponse httpServletResponse){
+      httpServletResponse.setHeader("Cache-Control", "no-chache");
+  }
 }
