@@ -7,8 +7,11 @@ package com.fpmislata.banco.presentacion;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fpmislata.banco.datos.EntidadBancariaDAO;
+import com.fpmislata.banco.datos.EntidadBancariaDAOImpHibernate;
 import com.fpmislata.banco.datos.SucursalBancariaDAO;
 import com.fpmislata.banco.modelo.BussinesMessage;
+import com.fpmislata.banco.modelo.EntidadBancaria;
 import com.fpmislata.banco.modelo.SucursalBancaria;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,12 +110,16 @@ public class SucursalesBancariasController {
         }
     }
 
-    @RequestMapping(value = {"/SucursalBancaria/"}, method = RequestMethod.POST)
-    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String json) throws JsonProcessingException {
+    @RequestMapping(value = {"/SucursalBancaria/{idEntidadBancaria}"}, method = RequestMethod.POST)
+    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria, @RequestBody String json) throws JsonProcessingException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             SucursalBancaria sucursalBancaria = (SucursalBancaria) objectMapper.readValue(json, SucursalBancaria.class);
+            EntidadBancaria entidadBancaria;
+            EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
+            entidadBancaria = entidadBancariaDAO.read(idEntidadBancaria);
+            sucursalBancaria.setEntidadBancaria(entidadBancaria);
             sucursalBancariaDAO.insert(sucursalBancaria);
             noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
