@@ -7,8 +7,11 @@ package com.fpmislata.banco.presentacion;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fpmislata.banco.datos.CuentaBancariaDAO;
+import com.fpmislata.banco.datos.CuentaBancariaDAOImpHibernate;
 import com.fpmislata.banco.datos.MovimientoBancarioDAO;
 import com.fpmislata.banco.modelo.BussinesMessage;
+import com.fpmislata.banco.modelo.CuentaBancaria;
 import com.fpmislata.banco.modelo.MovimientoBancario;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,12 +105,16 @@ public class MovimientosBancariosController {
         }
     }
 
-    @RequestMapping(value = {"/MovimientoBancario/"}, method = RequestMethod.POST)
-    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String json) throws JsonProcessingException {
+    @RequestMapping(value = {"/MovimientoBancario/{idCuentaBancaria}"}, method = RequestMethod.POST)
+    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse,@PathVariable("idCuentaBancaria") int idCuentaBancaria, @RequestBody String json) throws JsonProcessingException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             MovimientoBancario movimientoBancario = (MovimientoBancario) objectMapper.readValue(json, MovimientoBancario.class);
+            CuentaBancaria cuentaBancaria;
+            CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImpHibernate();
+            cuentaBancaria = cuentaBancariaDAO.read(idCuentaBancaria);
+            movimientoBancario.setCuentaBancaria(cuentaBancaria);
             movimientoBancarioDAO.insert(movimientoBancario);
             noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
