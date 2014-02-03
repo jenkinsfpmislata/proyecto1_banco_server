@@ -16,5 +16,6 @@ import org.hibernate.SessionFactory;
  */
 public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario, Integer>{
 
+    public List<MovimientoBancario> findByCuenta(String idCuentaBancaria);
     
 }

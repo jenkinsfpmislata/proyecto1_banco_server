@@ -172,6 +172,28 @@ public class MovimientosBancariosController {
             }
         }
     }
+        @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}/MovimientosBancarios"}, method = RequestMethod.GET)
+    public void readMovimientosPorCuenta(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") String idCuentaBancaria) {
+        try {
+            ObjectMapper jackson = new ObjectMapper();
+            String json = jackson.writeValueAsString(movimientoBancarioDAO.findByCuenta(idCuentaBancaria));
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            noCache(httpServletResponse);
+            httpServletResponse.getWriter().println(json);
+
+        } catch (Exception ex) {
+            noCache(httpServletResponse);
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                noCache(httpServletResponse);
+                ex.printStackTrace(httpServletResponse.getWriter());
+            } catch (Exception ex1) {
+                noCache(httpServletResponse);
+            }
+        }
+    }
       private void noCache(HttpServletResponse httpServletResponse){
       httpServletResponse.setHeader("Cache-Control", "no-cache");
   }

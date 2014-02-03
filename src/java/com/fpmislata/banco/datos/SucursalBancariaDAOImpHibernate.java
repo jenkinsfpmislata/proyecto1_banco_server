@@ -41,6 +41,7 @@ public class SucursalBancariaDAOImpHibernate extends GenericDAOImpHibernate<Sucu
         List<SucursalBancaria> sucursalesBancarias = query.list();
         
         session.getTransaction().commit();
-        return sucursalesBancarias;    }
+        return sucursalesBancarias;    
+    }
     
 }

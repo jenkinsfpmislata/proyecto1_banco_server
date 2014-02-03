@@ -33,7 +33,7 @@ public class CuentasBancariasController {
     @Autowired
     private CuentaBancariaDAO cuentaBancariaDAO;
 
-    @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/CuentaBancaria/id/{idCuentaBancaria}"}, method = RequestMethod.GET)
     public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
             ObjectMapper jackson = new ObjectMapper();
