@@ -110,12 +110,27 @@ public class MovimientosBancariosController {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+            
             MovimientoBancario movimientoBancario = (MovimientoBancario) objectMapper.readValue(json, MovimientoBancario.class);
+            
             CuentaBancaria cuentaBancaria;
             CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImpHibernate();
             cuentaBancaria = cuentaBancariaDAO.read(idCuentaBancaria);
+            
             movimientoBancario.setCuentaBancaria(cuentaBancaria);
+            
+            Double saldoActual = cuentaBancaria.getSaldo();
+            if(movimientoBancario.getTipoMovimientoBancario().name().equalsIgnoreCase("debe")){
+                saldoActual = saldoActual - movimientoBancario.getImporte();
+                cuentaBancaria.setSaldo(saldoActual);
+            }else{
+                saldoActual = saldoActual + movimientoBancario.getImporte();
+                cuentaBancaria.setSaldo(saldoActual);
+            }
+            
             movimientoBancarioDAO.insert(movimientoBancario);
+            cuentaBancariaDAO.update(cuentaBancaria);
+            
             noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } catch (ConstraintViolationException cve) {
