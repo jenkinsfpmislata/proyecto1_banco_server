@@ -16,6 +16,6 @@ public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario, In
 
     public List<MovimientoBancario> findByCuenta(String idCuentaBancaria);
     
-    public void actualizarSaldo(CuentaBancaria cuentaBancaria, MovimientoBancario movimientoBancario);
+    public void actualizarSaldo(MovimientoBancario movimientoBancario);
     
 }

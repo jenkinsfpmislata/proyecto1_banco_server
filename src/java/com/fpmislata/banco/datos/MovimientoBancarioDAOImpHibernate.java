@@ -32,16 +32,25 @@ public class MovimientoBancarioDAOImpHibernate extends GenericDAOImpHibernate<Mo
     }
 
     @Override
-    public void actualizarSaldo(CuentaBancaria cuentaBancaria, MovimientoBancario movimientoBancario) {
+    public void actualizarSaldo(MovimientoBancario movimientoBancario) {
         CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImpHibernate();
-        Double saldoActual = cuentaBancaria.getSaldo();
+        Double saldoActual = movimientoBancario.getCuentaBancaria().getSaldo();
         if (movimientoBancario.getTipoMovimientoBancario().name().equalsIgnoreCase("debe")) {
             saldoActual = saldoActual - movimientoBancario.getImporte();
-            cuentaBancaria.setSaldo(saldoActual);
+            movimientoBancario.getCuentaBancaria().setSaldo(saldoActual);
         } else {
             saldoActual = saldoActual + movimientoBancario.getImporte();
-            cuentaBancaria.setSaldo(saldoActual);
+            movimientoBancario.getCuentaBancaria().setSaldo(saldoActual);
         }
-        cuentaBancariaDAO.update (cuentaBancaria);
-    }    
+        cuentaBancariaDAO.update(movimientoBancario.getCuentaBancaria());
+    } 
+
+    @Override
+    public void insert(MovimientoBancario movimientoBancario) {
+        actualizarSaldo(movimientoBancario);
+        super.insert(movimientoBancario); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
 }

@@ -113,12 +113,8 @@ public class MovimientosBancariosController {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-
             MovimientoBancario movimientoBancario = (MovimientoBancario) objectMapper.readValue(json, MovimientoBancario.class);
-
-            movimientoBancarioDAO.actualizarSaldo(movimientoBancario.getCuentaBancaria(), movimientoBancario);
             movimientoBancarioDAO.insert(movimientoBancario);
-
             noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } catch (ConstraintViolationException cve) {
