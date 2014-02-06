@@ -116,10 +116,7 @@ public class MovimientosBancariosController {
 
             MovimientoBancario movimientoBancario = (MovimientoBancario) objectMapper.readValue(json, MovimientoBancario.class);
 
-            cuentaBancaria = cuentaBancariaDAO.read(idCuentaBancaria);
-            movimientoBancario.setCuentaBancaria(cuentaBancaria);
-
-            movimientoBancarioDAO.actualizarSaldo(cuentaBancaria, movimientoBancario);
+            movimientoBancarioDAO.actualizarSaldo(movimientoBancario.getCuentaBancaria(), movimientoBancario);
             movimientoBancarioDAO.insert(movimientoBancario);
 
             noCache(httpServletResponse);
