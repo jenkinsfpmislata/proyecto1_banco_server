@@ -18,4 +18,5 @@
     <bean class="com.fpmislata.banco.datos.CuentaBancariaDAOImpHibernate" />
     <bean class="com.fpmislata.banco.datos.MovimientoBancarioDAOImpHibernate" />
     <bean class="com.fpmislata.banco.datos.SucursalBancariaDAOImpHibernate" />
+    <bean class="com.fpmislata.banco.datos.LoginDAOImplHibernate" />
 </beans>

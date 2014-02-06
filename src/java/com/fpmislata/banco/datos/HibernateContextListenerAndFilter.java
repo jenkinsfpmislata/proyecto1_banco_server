@@ -26,7 +26,7 @@ public class HibernateContextListenerAndFilter implements Filter,ServletContextL
      public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         try {
             HibernateUtil.openSessionAndBindToThread();
-            filterChain.doFilter(servletRequest, servletResponse);
+                filterChain.doFilter(servletRequest, servletResponse);
          } finally {
              HibernateUtil.closeSessionAndUnbindFromThread();
          }
