@@ -4,6 +4,7 @@
  */
 package com.fpmislata.banco.datos;
 
+import com.fpmislata.banco.modelo.CuentaBancaria;
 import com.fpmislata.banco.modelo.MovimientoBancario;
 import com.fpmislata.banco.modelo.SucursalBancaria;
 import java.util.List;
@@ -30,4 +31,17 @@ public class MovimientoBancarioDAOImpHibernate extends GenericDAOImpHibernate<Mo
         return movimientosBancarios;
     }
 
+    @Override
+    public void actualizarSaldo(CuentaBancaria cuentaBancaria, MovimientoBancario movimientoBancario) {
+        CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImpHibernate();
+        Double saldoActual = cuentaBancaria.getSaldo();
+        if (movimientoBancario.getTipoMovimientoBancario().name().equalsIgnoreCase("debe")) {
+            saldoActual = saldoActual - movimientoBancario.getImporte();
+            cuentaBancaria.setSaldo(saldoActual);
+        } else {
+            saldoActual = saldoActual + movimientoBancario.getImporte();
+            cuentaBancaria.setSaldo(saldoActual);
+        }
+        cuentaBancariaDAO.update (cuentaBancaria);
+    }    
 }

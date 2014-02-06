@@ -4,11 +4,9 @@
  */
 package com.fpmislata.banco.datos;
 
-import com.fpmislata.banco.modelo.EntidadBancaria;
+import com.fpmislata.banco.modelo.CuentaBancaria;
 import com.fpmislata.banco.modelo.MovimientoBancario;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  *
@@ -17,5 +15,7 @@ import org.hibernate.SessionFactory;
 public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario, Integer>{
 
     public List<MovimientoBancario> findByCuenta(String idCuentaBancaria);
+    
+    public void actualizarSaldo(CuentaBancaria cuentaBancaria, MovimientoBancario movimientoBancario);
     
 }

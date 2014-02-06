@@ -35,6 +35,8 @@ public class MovimientosBancariosController {
 
     @Autowired
     private MovimientoBancarioDAO movimientoBancarioDAO;
+    CuentaBancaria cuentaBancaria;
+    CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImpHibernate();
 
     @RequestMapping(value = {"/MovimientoBancario/{idMovimientoBancario}"}, method = RequestMethod.GET)
     public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idMovimientoBancario") int idMovimientoBancario) {
@@ -60,10 +62,11 @@ public class MovimientosBancariosController {
 
 
     }
+
     @RequestMapping(value = {"/MovimientosBancarios"}, method = RequestMethod.GET)
     public void readAll(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
         try {
-            
+
             ObjectMapper jackson = new ObjectMapper();
             String json = jackson.writeValueAsString(movimientoBancarioDAO.findAll());
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -106,31 +109,19 @@ public class MovimientosBancariosController {
     }
 
     @RequestMapping(value = {"/MovimientoBancario/{idCuentaBancaria}"}, method = RequestMethod.POST)
-    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse,@PathVariable("idCuentaBancaria") int idCuentaBancaria, @RequestBody String json) throws JsonProcessingException {
+    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria, @RequestBody String json) throws JsonProcessingException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-            
+
             MovimientoBancario movimientoBancario = (MovimientoBancario) objectMapper.readValue(json, MovimientoBancario.class);
-            
-            CuentaBancaria cuentaBancaria;
-            CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImpHibernate();
+
             cuentaBancaria = cuentaBancariaDAO.read(idCuentaBancaria);
-            
             movimientoBancario.setCuentaBancaria(cuentaBancaria);
-            
-            Double saldoActual = cuentaBancaria.getSaldo();
-            if(movimientoBancario.getTipoMovimientoBancario().name().equalsIgnoreCase("debe")){
-                saldoActual = saldoActual - movimientoBancario.getImporte();
-                cuentaBancaria.setSaldo(saldoActual);
-            }else{
-                saldoActual = saldoActual + movimientoBancario.getImporte();
-                cuentaBancaria.setSaldo(saldoActual);
-            }
-            
+
+            movimientoBancarioDAO.actualizarSaldo(cuentaBancaria, movimientoBancario);
             movimientoBancarioDAO.insert(movimientoBancario);
-            cuentaBancariaDAO.update(cuentaBancaria);
-            
+
             noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } catch (ConstraintViolationException cve) {
@@ -138,11 +129,11 @@ public class MovimientosBancariosController {
             ObjectMapper jackson = new ObjectMapper();
             System.out.println("No se ha podido insertar el movimiento bancario debido a los siguientes errores:");
             for (ConstraintViolation constraintViolation : cve.getConstraintViolations()) {
-               String datos = constraintViolation.getPropertyPath().toString();
-               String mensage = constraintViolation.getMessage();
-               
-               BussinesMessage bussinesMessage = new BussinesMessage(datos,mensage);
-               errorList.add(bussinesMessage);
+                String datos = constraintViolation.getPropertyPath().toString();
+                String mensage = constraintViolation.getMessage();
+
+                BussinesMessage bussinesMessage = new BussinesMessage(datos, mensage);
+                errorList.add(bussinesMessage);
             }
             String jsonInsert = jackson.writeValueAsString(errorList);
             noCache(httpServletResponse);
@@ -194,7 +185,8 @@ public class MovimientosBancariosController {
             }
         }
     }
-        @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}/MovimientosBancarios"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}/MovimientosBancarios"}, method = RequestMethod.GET)
     public void readMovimientosPorCuenta(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") String idCuentaBancaria) {
         try {
             ObjectMapper jackson = new ObjectMapper();
@@ -216,7 +208,8 @@ public class MovimientosBancariosController {
             }
         }
     }
-      private void noCache(HttpServletResponse httpServletResponse){
-      httpServletResponse.setHeader("Cache-Control", "no-cache");
-  }
+
+    private void noCache(HttpServletResponse httpServletResponse) {
+        httpServletResponse.setHeader("Cache-Control", "no-cache");
+    }
 }
