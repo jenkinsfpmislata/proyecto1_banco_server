@@ -26,15 +26,13 @@ public class LoginDAOImplHibernate extends GenericDAOImpHibernate<Login, Integer
         query.setString(1, login.getPassword());
         
         List<Login> loginList = query.list();
+        if (loginList.isEmpty()) {
+            return false;
+        }else{
         Login loginUser = loginList.get(0);
         session.getTransaction().commit();
-        
-        if (loginUser != null) {
-            return true;
-        }else{
-            return false;
+        return true;
         }
-        
     }
     
 }

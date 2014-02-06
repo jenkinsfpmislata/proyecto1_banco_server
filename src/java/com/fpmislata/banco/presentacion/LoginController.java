@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +26,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author alumno
  */
+@Controller
 public class LoginController {
+    @Autowired
     private LoginDAO loginDAO;
     
 @RequestMapping(value = {"/Login"}, method = RequestMethod.POST)
@@ -33,10 +37,14 @@ public class LoginController {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             Login login = (Login) objectMapper.readValue(json, Login.class);
-            loginDAO.verificarLogin(login);
-            
+            boolean log = loginDAO.verificarLogin(login);
+            if (log) {
             noCache(httpServletResponse);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            }else{
+            noCache(httpServletResponse);
+            httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN); 
+            }        
         } catch (ConstraintViolationException cve) {
             List<BussinesMessage> errorList = new ArrayList();
             ObjectMapper jackson = new ObjectMapper();
