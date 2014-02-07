@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class LoginController {
+    
     @Autowired
     private LoginDAO loginDAO;
     
@@ -52,7 +53,6 @@ public class LoginController {
             for (ConstraintViolation constraintViolation : cve.getConstraintViolations()) {
                 String datos = constraintViolation.getPropertyPath().toString();
                 String mensage = constraintViolation.getMessage();
-
                 BussinesMessage bussinesMessage = new BussinesMessage(datos, mensage);
                 errorList.add(bussinesMessage);
             }
