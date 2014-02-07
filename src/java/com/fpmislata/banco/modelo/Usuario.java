@@ -102,7 +102,7 @@ public class Usuario implements Serializable {
 
     public boolean checkPassword(String unEncryptedPassword) {
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-        if (passwordEncryptor.checkPassword(password, unEncryptedPassword)) {
+        if (passwordEncryptor.checkPassword(unEncryptedPassword, password)) {
             return true;
         } else {
             return false;
