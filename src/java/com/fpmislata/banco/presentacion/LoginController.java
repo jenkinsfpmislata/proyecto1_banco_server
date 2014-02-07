@@ -7,9 +7,10 @@ package com.fpmislata.banco.presentacion;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fpmislata.banco.datos.LoginDAO;
+import com.fpmislata.banco.datos.UsuarioDAO;
 import com.fpmislata.banco.modelo.BussinesMessage;
-import com.fpmislata.banco.modelo.Login;
+import com.fpmislata.banco.modelo.CredencialesUsuario;
+import com.fpmislata.banco.modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -28,24 +29,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class LoginController {
-    
+
     @Autowired
-    private LoginDAO loginDAO;
-    
-@RequestMapping(value = {"/Login"}, method = RequestMethod.POST)
+    private UsuarioDAO usuarioDAO;
+
+    @RequestMapping(value = {"/Session"}, method = RequestMethod.POST)
     public void login(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String json) throws JsonProcessingException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-            Login login = (Login) objectMapper.readValue(json, Login.class);
-            boolean log = loginDAO.verificarLogin(login);
-            if (log) {
-            noCache(httpServletResponse);
-            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-            }else{
-            noCache(httpServletResponse);
-            httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN); 
-            }        
+            CredencialesUsuario login = (CredencialesUsuario) objectMapper.readValue(json, CredencialesUsuario.class);
+            Usuario ok = usuarioDAO.readByUsername(login.getUsername());
+            if (ok != null) {
+                if (ok.checkPassword(login.getPassword())) {
+                    noCache(httpServletResponse);
+                    httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                } else {
+                    noCache(httpServletResponse);
+                    httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                }
+            } else {
+                noCache(httpServletResponse);
+                httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            }
         } catch (ConstraintViolationException cve) {
             List<BussinesMessage> errorList = new ArrayList();
             ObjectMapper jackson = new ObjectMapper();

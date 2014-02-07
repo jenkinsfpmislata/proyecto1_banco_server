@@ -33,7 +33,6 @@ public class MovimientoBancarioDAOImpHibernate extends GenericDAOImpHibernate<Mo
 
     @Override
     public void actualizarSaldo(MovimientoBancario movimientoBancario) {
-        CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImpHibernate();
         Double saldoActual = movimientoBancario.getCuentaBancaria().getSaldo();
         if (movimientoBancario.getTipoMovimientoBancario().name().equalsIgnoreCase("debe")) {
             saldoActual = saldoActual - movimientoBancario.getImporte();
@@ -42,7 +41,6 @@ public class MovimientoBancarioDAOImpHibernate extends GenericDAOImpHibernate<Mo
             saldoActual = saldoActual + movimientoBancario.getImporte();
             movimientoBancario.getCuentaBancaria().setSaldo(saldoActual);
         }
-        cuentaBancariaDAO.update(movimientoBancario.getCuentaBancaria());
     } 
 
     @Override
