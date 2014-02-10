@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author alumno
  */
 @Controller
-public class LoginController {
+public class SessionController {
 
     @Autowired
     private UsuarioDAO usuarioDAO;
