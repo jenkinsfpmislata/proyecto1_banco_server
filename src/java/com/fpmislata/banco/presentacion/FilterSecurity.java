@@ -31,8 +31,8 @@ public class FilterSecurity implements Filter{
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest)request;
         System.out.println("Estoy filtrando la URI " + httpServletRequest.getRequestURL());
-        chain.doFilter(request, response);
-    }
+            chain.doFilter(request, response);  
+        }
 
     @Override
     public void destroy() {

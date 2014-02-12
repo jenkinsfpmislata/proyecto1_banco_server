@@ -45,6 +45,8 @@ public class SessionController {
             Usuario ok = usuarioDAO.readByUsername(login.getUsername());
             if (ok != null) {
                 if (ok.checkPassword(login.getPassword())) {
+                    HttpSession httpSession = httpRequest.getSession();
+                    httpSession.setAttribute("usuario", ok.getUsername());
                     noCache(httpServletResponse);
                     httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                 } else {
