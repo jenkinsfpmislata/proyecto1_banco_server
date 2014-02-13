@@ -39,11 +39,9 @@ public class FilterSecurity implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         
         URI uri = URI.create(httpServletRequest.getRequestURI());
-        String username = (String)httpServletRequest.getSession().getAttribute("username");
+        String username = (String)httpServletRequest.getSession().getAttribute("usuario");
         Usuario user = usuarioDAO.readByUsername(username);
-        System.out.println(httpServletRequest.getMethod());
-        System.out.println(username);
-        System.out.println(user);
+
         if (autorizacionCutre.allowURL(uri, user, httpServletRequest.getMethod())) {
             chain.doFilter(request, response);
         }else{

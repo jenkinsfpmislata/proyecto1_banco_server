@@ -5,7 +5,7 @@
             driverClassName="com.mysql.jdbc.Driver" 
             url="jdbc:mysql://localhost/proyecto1_banco_servidor"
             username="root"
-            password="root"
+            password="frodo2013"
             initialSize="2"
             maxActive="10" 
             maxIdle="5" 
