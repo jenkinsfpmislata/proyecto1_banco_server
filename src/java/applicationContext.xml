@@ -19,5 +19,7 @@
     <bean class="com.fpmislata.banco.datos.MovimientoBancarioDAOImpHibernate" />
     <bean class="com.fpmislata.banco.datos.SucursalBancariaDAOImpHibernate" />
     <bean class="com.fpmislata.banco.datos.UsuarioDAOImplHibernate" />
-    <bean class="com.fpmislata.banco.presentacion.FilterSecurity" id="FilterSecurity" />
+    <bean class="com.fpmislata.banco.presentacion.seguridad.FilterSecurity" id="FilterSecurity" />
+    <bean class="com.fpmislata.banco.presentacion.seguridad.AutorizacionImplCutre" />
+
 </beans>
