@@ -10,6 +10,7 @@
 
 
     <context:component-scan base-package="com.fpmislata.banco.presentacion" />
+    <context:component-scan base-package="com.fpmislata.banco.presentacion.seguridad" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
