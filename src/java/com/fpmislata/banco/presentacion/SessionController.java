@@ -36,7 +36,7 @@ public class SessionController {
     @Autowired
     private UsuarioDAO usuarioDAO;
 
-    @RequestMapping(value = {"/Session/"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/Session"}, method = RequestMethod.POST)
     public void login(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String json) throws JsonProcessingException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
