@@ -26,25 +26,28 @@ public class FilterSecurity implements Filter {
 
     @Autowired
     UsuarioDAO usuarioDAO;
-    
+
     @Autowired
     Autorizacion autorizacionCutre;
+    
+    private FilterConfig filterConfig = null;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+        this.filterConfig = filterConfig;
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        
+
         URI uri = URI.create(httpServletRequest.getRequestURI());
-        String username = (String)httpServletRequest.getSession().getAttribute("usuario");
+        String username = (String) httpServletRequest.getSession().getAttribute("usuario");
         Usuario user = usuarioDAO.readByUsername(username);
 
         if (autorizacionCutre.allowURL(uri, user, httpServletRequest.getMethod())) {
             chain.doFilter(request, response);
-        }else{
+        } else {
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             httpServletResponse.setStatus(httpServletResponse.SC_FORBIDDEN);
         }
