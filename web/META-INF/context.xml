@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/proyecto1_banco_servidor">
-  <Resource name="jdbc/proyecto1_banco_servidor" auth="Container"
-            type="javax.sql.DataSource"
-            driverClassName="com.mysql.jdbc.Driver" 
-            url="jdbc:mysql://localhost/proyecto1_banco_servidor"
-            username="root"
-            password="frodo2013"
-            initialSize="2"
-            maxActive="10" 
-            maxIdle="5" 
-            removeAbandoned="true" 
-            removeAbandonedTimeout="60" 
-            validationQuery="SELECT 1 FROM DUAL"
-            />
+<Context antiJARLocking="true" path="/proyecto1_banco_server">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" 
+            initialSize="2" maxActive="10" maxIdle="5" 
+            name="jdbc/proyecto1_banco_servidor" password="frodo2013" 
+            removeAbandoned="true" removeAbandonedTimeout="60" type="javax.sql.DataSource"
+            url="jdbc:mysql://localhost/proyecto1_banco_servidor" username="root" 
+            validationQuery="SELECT 1 FROM DUAL"/>
 </Context>
