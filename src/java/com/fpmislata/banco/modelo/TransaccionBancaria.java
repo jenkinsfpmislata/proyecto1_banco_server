@@ -5,6 +5,8 @@
 package com.fpmislata.banco.modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -12,12 +14,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
 public class TransaccionBancaria {
-
+    @NotNull
     private String userTienda;
+    @NotNull
     private String passwordTienda;
     private Double total;
+    @NotNull
+    @Size(min = 20, max = 20)
     private String codigoCuentaClienteOrigen;
+    @NotNull
+    @Size(min = 20, max = 20)
     private String codigoCuentaClienteDestino;
+    @NotNull
+    @Size(min = 10, max = 200)
     private String concepto;
 
     public TransaccionBancaria() {

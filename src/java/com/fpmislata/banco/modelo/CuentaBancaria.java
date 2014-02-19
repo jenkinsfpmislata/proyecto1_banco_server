@@ -7,6 +7,8 @@ package com.fpmislata.banco.modelo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -14,11 +16,17 @@ import java.util.List;
  */
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class CuentaBancaria {
+    @NotNull
     private int idCuentaBancaria;
     private SucursalBancaria sucursalBancaria;
+    @NotNull
+    @Size(min = 10, max = 10)
     private String numeroCuenta;
+    @NotNull
+    @Size(min = 2, max = 2)
     private String dc;
     private double saldo;
+    @NotNull
     private String cif;
     private List <MovimientoBancario> ListaMovimientoBancario = new ArrayList();
     
