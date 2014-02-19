@@ -42,7 +42,7 @@ public class SessionController {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             CredencialesUsuario login = (CredencialesUsuario) objectMapper.readValue(json, CredencialesUsuario.class);
-            Usuario ok = usuarioDAO.readByUsername(login.getUsername());
+            Usuario ok = usuarioDAO.readByUsername(login.getUsername());//busca por nombreUsuario
             if (ok != null) {
                 if (ok.checkPassword(login.getPassword())) {
                     HttpSession httpSession = httpRequest.getSession();
@@ -81,6 +81,19 @@ public class SessionController {
                 noCache(httpServletResponse);
             }
         }
+    }
+
+    @RequestMapping(value = {"/Session"}, method = RequestMethod.GET)
+    public void recuperarSession(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
+        //ObjectMapper objectMapper = new ObjectMapper();
+        //objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        //CredencialesUsuario login = new CredencialesUsuario();
+        //HttpSession httpSession = httpRequest.getSession();
+        //String usuario=httpSession.getAttribute("usuario");
+        //String nombre = (String) httpSession.getAttribute("usuario");
+        //Usuario ok = usuarioDAO.readByUsername(nombre);
+        //httpSession.getAttribute("usuario");
+        
     }
 
     private void noCache(HttpServletResponse httpServletResponse) {
