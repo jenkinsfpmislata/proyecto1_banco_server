@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -15,12 +17,14 @@ import java.util.List;
  */
 @JsonIgnoreProperties({ "handler" ,"hibernateLazyInitializer"})
 public class MovimientoBancario {
-
+    @NotNull
     private int idMovimientoBancario;
     private TipoMovimientoBancario tipoMovimientoBancario;
     private CuentaBancaria cuentaBancaria;
     private Double importe;
     private Date fecha;
+    @NotNull
+    @Size(min = 10, max = 200)
     private String concepto;
 
     public MovimientoBancario() {
