@@ -52,6 +52,7 @@ public class SessionController {
                     httpSession.setAttribute("usuario", ok.getUsername());
                     noCache(httpServletResponse);
                     httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                    
                 } else {
                     noCache(httpServletResponse);
                     httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -89,16 +90,34 @@ public class SessionController {
     @RequestMapping(value = {"/Session"}, method = RequestMethod.GET)
     public void recuperarSession(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
         try {
-            ObjectMapper jackson = new ObjectMapper();
-            HttpSession session = httpRequest.getSession(true);
+            HttpSession session = httpRequest.getSession();
+            String username= (String)session.getAttribute("usuario");
+            Usuario usuario=usuarioDAO.readByUsername(username);
+            if (usuario !=null) {
+                ObjectMapper jackson = new ObjectMapper();
+                String userJson=jackson.writeValueAsString(usuario);
+                noCache(httpServletResponse);
+                httpServletResponse.getWriter().println(userJson);
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            }else {
+                noCache(httpServletResponse);
+                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            }
+            noCache(httpServletResponse);
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             
-            CredencialesUsuario actualSession = (CredencialesUsuario) session.getAttribute(session.getId());
-            String nombreUsuario=actualSession.getUsername();
-            Usuario usuario=usuarioDAO.readByUsername(nombreUsuario);
-            int idUsuario=usuario.getIdUsuario();
-            jackson.writeValueAsString(idUsuario);
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            noCache(httpServletResponse);
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                noCache(httpServletResponse);
+                ex.printStackTrace(httpServletResponse.getWriter());          
+            } catch (Exception ex1) {
+                noCache(httpServletResponse);
+            }
         }
     }
 
