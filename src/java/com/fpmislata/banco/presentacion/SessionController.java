@@ -13,6 +13,8 @@ import com.fpmislata.banco.modelo.CredencialesUsuario;
 import com.fpmislata.banco.modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,15 +88,18 @@ public class SessionController {
 
     @RequestMapping(value = {"/Session"}, method = RequestMethod.GET)
     public void recuperarSession(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
-        //ObjectMapper objectMapper = new ObjectMapper();
-        //objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        //CredencialesUsuario login = new CredencialesUsuario();
-        //HttpSession httpSession = httpRequest.getSession();
-        //String usuario=httpSession.getAttribute("usuario");
-        //String nombre = (String) httpSession.getAttribute("usuario");
-        //Usuario ok = usuarioDAO.readByUsername(nombre);
-        //httpSession.getAttribute("usuario");
-        
+        try {
+            ObjectMapper jackson = new ObjectMapper();
+            HttpSession session = httpRequest.getSession(true);
+            
+            CredencialesUsuario actualSession = (CredencialesUsuario) session.getAttribute(session.getId());
+            String nombreUsuario=actualSession.getUsername();
+            Usuario usuario=usuarioDAO.readByUsername(nombreUsuario);
+            int idUsuario=usuario.getIdUsuario();
+            jackson.writeValueAsString(idUsuario);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     private void noCache(HttpServletResponse httpServletResponse) {
