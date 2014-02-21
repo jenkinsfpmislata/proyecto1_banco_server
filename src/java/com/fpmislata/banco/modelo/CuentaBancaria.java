@@ -29,7 +29,7 @@ public class CuentaBancaria {
     @NotNull
     private String cif;
     private List <MovimientoBancario> ListaMovimientoBancario = new ArrayList();
-    
+    private Usuario usuario;
     public CuentaBancaria(){
         
     }
