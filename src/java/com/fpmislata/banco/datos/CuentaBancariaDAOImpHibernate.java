@@ -5,6 +5,7 @@
 package com.fpmislata.banco.datos;
 
 import com.fpmislata.banco.modelo.CuentaBancaria;
+import com.fpmislata.banco.modelo.Usuario;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -13,14 +14,15 @@ import org.hibernate.Session;
  *
  * @author alumno
  */
-public class CuentaBancariaDAOImpHibernate extends GenericDAOImpHibernate<CuentaBancaria, Integer> implements CuentaBancariaDAO{
-        @Override
+public class CuentaBancariaDAOImpHibernate extends GenericDAOImpHibernate<CuentaBancaria, Integer> implements CuentaBancariaDAO {
+
+    @Override
     public CuentaBancaria findByCodigo(String CodigoCuentaCliente) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
         Query query = session.createQuery("SELECT cuentaBancaria FROM CuentaBancaria cuentaBancaria WHERE cuentaBancaria.sucursalBancaria.codigoSucursal=? AND cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria=? AND cuentaBancaria.dc=? AND cuentaBancaria.numeroCuenta=?");
-        
+
         query.setString(0, CodigoCuentaCliente.substring(0, 4));
         query.setString(1, CodigoCuentaCliente.substring(4, 8));
         query.setString(2, CodigoCuentaCliente.substring(8, 10));
@@ -41,6 +43,22 @@ public class CuentaBancariaDAOImpHibernate extends GenericDAOImpHibernate<Cuenta
         } else {
             return null;
         }
+    }
+    
+    @Override
+    public List<CuentaBancaria> findByUser(int idUsuario) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
 
+        Query query = session.createQuery("SELECT cuentaBancaria FROM CuentaBancaria cuentaBancaria WHERE cuentaBancaria.idUsuario=? ");
+        query.setInteger(0, idUsuario);
+        
+        List<CuentaBancaria> listaCuentaBancaria = query.list();
+        
+        if (listaCuentaBancaria != null) {
+            return null;
+            }else{
+            return listaCuentaBancaria;
+        }
     }
 }

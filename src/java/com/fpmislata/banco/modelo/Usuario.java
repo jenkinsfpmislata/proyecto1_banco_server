@@ -5,7 +5,10 @@
 package com.fpmislata.banco.modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fpmislata.banco.datos.CuentaBancariaDAO;
+import com.fpmislata.banco.datos.CuentaBancariaDAOImpHibernate;
 import java.io.Serializable;
+import java.util.List;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 
 /**
@@ -107,5 +110,15 @@ public class Usuario implements Serializable {
         } else {
             return false;
         }
+    }
+    
+    public Double totalSaldoCuentas(){
+        CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImpHibernate();
+        List<CuentaBancaria> listaCuentas = cuentaBancariaDAO.findByUser(idUsuario);
+        Double saldoTotal = 0.0;
+        for (CuentaBancaria cuentaBancaria : listaCuentas) {
+            saldoTotal = saldoTotal + cuentaBancaria.getSaldo();
+        }
+        return saldoTotal;
     }
 }

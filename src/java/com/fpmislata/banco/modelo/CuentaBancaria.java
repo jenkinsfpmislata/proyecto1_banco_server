@@ -16,6 +16,7 @@ import java.util.List;
 public class CuentaBancaria {
     private int idCuentaBancaria;
     private SucursalBancaria sucursalBancaria;
+    private Usuario usuario;
     private String numeroCuenta;
     private String dc;
     private double saldo;
@@ -82,6 +83,11 @@ public class CuentaBancaria {
         this.ListaMovimientoBancario = ListaMovimientoBancario;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
