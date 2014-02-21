@@ -13,6 +13,8 @@ import com.fpmislata.banco.modelo.CredencialesUsuario;
 import com.fpmislata.banco.modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,13 +45,14 @@ public class SessionController {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             CredencialesUsuario login = (CredencialesUsuario) objectMapper.readValue(json, CredencialesUsuario.class);
-            Usuario ok = usuarioDAO.readByUsername(login.getUsername());
+            Usuario ok = usuarioDAO.readByUsername(login.getUsername());//busca por nombreUsuario
             if (ok != null) {
                 if (ok.checkPassword(login.getPassword())) {
                     HttpSession httpSession = httpRequest.getSession();
                     httpSession.setAttribute("usuario", ok.getUsername());
                     noCache(httpServletResponse);
                     httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                    
                 } else {
                     noCache(httpServletResponse);
                     httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -77,6 +81,40 @@ public class SessionController {
             try {
                 noCache(httpServletResponse);
                 ex.printStackTrace(httpServletResponse.getWriter());
+            } catch (Exception ex1) {
+                noCache(httpServletResponse);
+            }
+        }
+    }
+
+    @RequestMapping(value = {"/Session"}, method = RequestMethod.GET)
+    public void recuperarSession(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
+        try {
+            HttpSession session = httpRequest.getSession();
+            String username= (String)session.getAttribute("usuario");
+            Usuario usuario=usuarioDAO.readByUsername(username);
+            if (usuario !=null) {
+                ObjectMapper jackson = new ObjectMapper();
+                String userJson=jackson.writeValueAsString(usuario);
+                noCache(httpServletResponse);
+                httpServletResponse.getWriter().println(userJson);
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            }else {
+                noCache(httpServletResponse);
+                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            }
+            noCache(httpServletResponse);
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            
+        } catch (Exception ex) {
+            noCache(httpServletResponse);
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                noCache(httpServletResponse);
+                ex.printStackTrace(httpServletResponse.getWriter());          
             } catch (Exception ex1) {
                 noCache(httpServletResponse);
             }
