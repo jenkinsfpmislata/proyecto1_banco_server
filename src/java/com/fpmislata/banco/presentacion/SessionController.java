@@ -90,17 +90,17 @@ public class SessionController {
     @RequestMapping(value = {"/Session"}, method = RequestMethod.GET)
     public void recuperarSession(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
         try {
-            HttpSession session = httpRequest.getSession();
-            String username= (String)session.getAttribute("usuario");
-            Usuario usuario=usuarioDAO.readByUsername(username);
-            if (usuario !=null) {
-                ObjectMapper jackson = new ObjectMapper();
-                String userJson=jackson.writeValueAsString(usuario);
+            HttpSession session = httpRequest.getSession();//recoge la session
+            String username= (String)session.getAttribute("usuario");//recibe el atributo usuario y lo guarda
+            Usuario usuario=usuarioDAO.readByUsername(username);//lee el usuario
+            if (usuario !=null) {//si el usuario existe
+                ObjectMapper jackson = new ObjectMapper();//crea el objeto object mapper
+                String userJson=jackson.writeValueAsString(usuario);//convierte el usario a json
                 noCache(httpServletResponse);
-                httpServletResponse.getWriter().println(userJson);
-                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-                httpServletResponse.setContentType("text/plain; charset=UTF-8");
-            }else {
+                httpServletResponse.getWriter().println(userJson);//imprime el usuarioJSON
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);//pone el status a ok
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");//y el tipo a texto plano
+            }else {//si no existe
                 noCache(httpServletResponse);
                 httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 httpServletResponse.setContentType("text/plain; charset=UTF-8");
@@ -120,7 +120,38 @@ public class SessionController {
             }
         }
     }
-
+    
+    @RequestMapping(value = {"/Session"}, method = RequestMethod.DELETE)
+    public void deleteSession(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
+        try {
+            HttpSession session = httpRequest.getSession();//recoge la session
+            String username= (String)session.getAttribute("usuario");//recibe el atributo usuario y lo guarda
+            Usuario usuario=usuarioDAO.readByUsername(username);//lee el usuario
+            if (usuario !=null) {//si el usuario existe
+                session.removeAttribute("usuario");//elimina la session
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);//pone el status a ok
+                //httpServletResponse.setContentType("text/plain; charset=UTF-8");//y el tipo a texto plano
+            }else {//si no existe
+                noCache(httpServletResponse);
+                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            }
+            noCache(httpServletResponse);
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            
+        } catch (Exception ex) {
+            noCache(httpServletResponse);
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                noCache(httpServletResponse);
+                ex.printStackTrace(httpServletResponse.getWriter());          
+            } catch (Exception ex1) {
+                noCache(httpServletResponse);
+            }
+        }
+    }
+    
     private void noCache(HttpServletResponse httpServletResponse) {
         httpServletResponse.setHeader("Cache-Control", "no-cache");
     }
