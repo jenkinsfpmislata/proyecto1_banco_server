@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.fpmislata.banco.modelo.Credito" table="creditos" >
+        <id column="idCredito" name="idCredito" type="integer">
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cuentaBancaria">
+            <column name="idCuentaBancaria"  />
+        </many-to-one>
+        <property name="importe" column="importe" />
+        <property name="fecha" column="fecha" />
+    </class>
+</hibernate-mapping>
