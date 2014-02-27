@@ -75,7 +75,7 @@ public class CreditoController {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             } else {
                 noCache(httpServletResponse);
-                httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                httpServletResponse.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             }
 
         } catch (ConstraintViolationException cve) {
