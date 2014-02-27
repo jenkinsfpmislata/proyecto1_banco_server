@@ -5,6 +5,7 @@
 package com.fpmislata.banco.modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -13,7 +14,7 @@ import javax.validation.constraints.Size;
  * @author alumno
  */
 @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
-public class TransaccionBancaria {
+public class TransaccionBancaria implements Serializable{
     @NotNull
     private String userTienda;
     @NotNull

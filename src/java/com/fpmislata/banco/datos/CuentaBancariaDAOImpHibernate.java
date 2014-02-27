@@ -44,21 +44,17 @@ public class CuentaBancariaDAOImpHibernate extends GenericDAOImpHibernate<Cuenta
             return null;
         }
     }
-    
+
     @Override
     public List<CuentaBancaria> findByUser(int idUsuario) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("SELECT cuentaBancaria FROM CuentaBancaria cuentaBancaria WHERE cuentaBancaria.idUsuario=? ");
+        Query query = session.createQuery("SELECT cuentaBancaria FROM CuentaBancaria cuentaBancaria WHERE cuentaBancaria.usuario.idUsuario=? ");
         query.setInteger(0, idUsuario);
-        
+
         List<CuentaBancaria> listaCuentaBancaria = query.list();
-        
-        if (listaCuentaBancaria != null) {
-            return null;
-            }else{
-            return listaCuentaBancaria;
-        }
+
+        return listaCuentaBancaria;
     }
 }

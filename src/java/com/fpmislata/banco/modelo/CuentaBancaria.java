@@ -15,8 +15,12 @@ import javax.validation.constraints.Size;
  *
  * @author alumno
  */
+
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
-public class CuentaBancaria{
+public class CuentaBancaria implements Serializable{
+    
+    private static final long serialVersionUID = 34;
+    
     @NotNull
     private int idCuentaBancaria;
     private SucursalBancaria sucursalBancaria;

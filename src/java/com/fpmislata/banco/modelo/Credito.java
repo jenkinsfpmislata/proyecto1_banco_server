@@ -16,7 +16,7 @@ import java.util.Date;
  */
 
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
-public class Credito{
+public class Credito implements Serializable{
     private int idCredito;
     private CuentaBancaria cuentaBancaria;
     private double importe;

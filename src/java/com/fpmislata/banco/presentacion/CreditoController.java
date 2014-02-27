@@ -64,7 +64,7 @@ public class CreditoController {
                 MovimientoBancarioDAO movimientoBancarioDAO = new MovimientoBancarioDAOImpHibernate();
                 MovimientoBancario movimientoBancario = new MovimientoBancario();
 
-                movimientoBancario.setConcepto("Credito");
+                movimientoBancario.setConcepto("Credito Bitbank");
                 movimientoBancario.setFecha(new Date());
                 movimientoBancario.setImporte(credito.getImporte());
                 movimientoBancario.setTipoMovimientoBancario(TipoMovimientoBancario.Haber);
