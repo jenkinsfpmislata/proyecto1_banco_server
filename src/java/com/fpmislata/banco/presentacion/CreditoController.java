@@ -39,6 +39,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class CreditoController {
+    
+    @Autowired
+    CuentaBancariaDAO cuentaBancariaDAO;
+    
+    @Autowired
+    MovimientoBancarioDAO movimientoBancarioDAO;
 
     @RequestMapping(value = {"/Credito/{idCuentaBancaria}"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria, @RequestBody String json) throws JsonProcessingException {
@@ -47,7 +53,6 @@ public class CreditoController {
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             Credito credito = (Credito) objectMapper.readValue(json, Credito.class);
 
-            CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImpHibernate();
             CuentaBancaria cuentaBancaria = cuentaBancariaDAO.read(idCuentaBancaria);
             credito.setCuentaBancaria(cuentaBancaria);
             credito.setFecha(new Date());
@@ -61,7 +66,6 @@ public class CreditoController {
                 creditoDAO.insert(credito);
 
                 // ======================= Movimiento ============================= //
-                MovimientoBancarioDAO movimientoBancarioDAO = new MovimientoBancarioDAOImpHibernate();
                 MovimientoBancario movimientoBancario = new MovimientoBancario();
 
                 movimientoBancario.setConcepto("Credito Bitbank");
@@ -72,7 +76,7 @@ public class CreditoController {
 
                 movimientoBancarioDAO.insert(movimientoBancario);
                 noCache(httpServletResponse);
-                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
             } else {
                 noCache(httpServletResponse);
                 httpServletResponse.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);

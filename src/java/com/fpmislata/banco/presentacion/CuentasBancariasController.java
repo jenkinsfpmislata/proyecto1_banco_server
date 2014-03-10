@@ -56,6 +56,7 @@ public class CuentasBancariasController {
             }
         }
     }
+
     @RequestMapping(value = {"/CuentasBancarias"}, method = RequestMethod.GET)
     public void readAll(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
         try {
@@ -78,7 +79,6 @@ public class CuentasBancariasController {
                 noCache(httpServletResponse);
             }
         }
-
 
     }
 
@@ -172,7 +172,8 @@ public class CuentasBancariasController {
             }
         }
     }
-      private void noCache(HttpServletResponse httpServletResponse){
-      httpServletResponse.setHeader("Cache-Control", "no-cache");
-  }
+
+    private void noCache(HttpServletResponse httpServletResponse) {
+        httpServletResponse.setHeader("Cache-Control", "no-cache");
+    }
 }

@@ -2,14 +2,14 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.connection.datasource">java:/comp/env/jdbc/proyecto1_banco_servidor</property>
+    <property name="hibernate.connection.datasource">java:/comp/env/jdbc/datos</property>
     <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
     <property name="hibernate.show_sql">true</property>
-    <mapping resource="com/fpmislata/banco/modelo/EntidadBancaria.hbm.xml"/>
-    <mapping resource="com/fpmislata/banco/modelo/SucursalBancaria.hbm.xml"/>
-    <mapping resource="com/fpmislata/banco/modelo/CuentaBancaria.hbm.xml"/>
-    <mapping resource="com/fpmislata/banco/modelo/MovimientoBancario.hbm.xml"/>
-    <mapping resource="com/fpmislata/banco/modelo/Usuario.hbm.xml"/>
-    <mapping resource="com/fpmislata/banco/modelo/Credito.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/datos/EntidadBancaria.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/datos/SucursalBancaria.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/datos/CuentaBancaria.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/datos/MovimientoBancario.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/datos/Usuario.hbm.xml"/>
+    <mapping resource="com/fpmislata/banco/datos/Credito.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
