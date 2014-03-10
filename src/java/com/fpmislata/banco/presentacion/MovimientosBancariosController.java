@@ -34,10 +34,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MovimientosBancariosController {
 
     @Autowired
-    private MovimientoBancarioDAO movimientoBancarioDAO;
-    CuentaBancaria cuentaBancaria;
-    CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImpHibernate();
-
+    MovimientoBancarioDAO movimientoBancarioDAO;
+    
     @RequestMapping(value = {"/MovimientoBancario/{idMovimientoBancario}"}, method = RequestMethod.GET)
     public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idMovimientoBancario") int idMovimientoBancario) {
         try {
@@ -59,7 +57,6 @@ public class MovimientosBancariosController {
                 noCache(httpServletResponse);
             }
         }
-
 
     }
 
@@ -85,7 +82,6 @@ public class MovimientosBancariosController {
                 noCache(httpServletResponse);
             }
         }
-
 
     }
 

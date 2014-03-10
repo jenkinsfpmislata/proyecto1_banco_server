@@ -35,6 +35,9 @@ public class SucursalesBancariasController {
 
     @Autowired
     private SucursalBancariaDAO sucursalBancariaDAO;
+    
+    @Autowired
+    EntidadBancariaDAO entidadBancariaDAO;
 
     @RequestMapping(value = {"/SucursalBancaria/{nombreSucursal}"}, method = RequestMethod.GET)
     public void readByName(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("nombreSucursal") String nombreSucursal) {
@@ -117,7 +120,6 @@ public class SucursalesBancariasController {
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             SucursalBancaria sucursalBancaria = (SucursalBancaria) objectMapper.readValue(json, SucursalBancaria.class);
             EntidadBancaria entidadBancaria;
-            EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImpHibernate();
             entidadBancaria = entidadBancariaDAO.read(idEntidadBancaria);
             sucursalBancaria.setEntidadBancaria(entidadBancaria);
             sucursalBancariaDAO.insert(sucursalBancaria);
@@ -134,7 +136,7 @@ public class SucursalesBancariasController {
                 BussinesMessage bussinesMessage = new BussinesMessage(datos, mensage);
                 errorList.add(bussinesMessage);
             }
-            String jsonInsert = jackson.writeValueAsString(errorList);
+            jackson.writeValueAsString(errorList);
             noCache(httpServletResponse);
             httpServletResponse.setStatus(httpServletResponse.SC_BAD_REQUEST);
         } catch (Exception ex) {

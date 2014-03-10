@@ -45,6 +45,9 @@ public class CreditoController {
     
     @Autowired
     MovimientoBancarioDAO movimientoBancarioDAO;
+    
+    @Autowired
+    CreditoDAO creditoDAO;
 
     @RequestMapping(value = {"/Credito/{idCuentaBancaria}"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria, @RequestBody String json) throws JsonProcessingException {
@@ -57,7 +60,6 @@ public class CreditoController {
             credito.setCuentaBancaria(cuentaBancaria);
             credito.setFecha(new Date());
 
-            CreditoDAO creditoDAO = new CreditoDAOImpHibernate();
             boolean ok = creditoDAO.comprobarCredito(credito.getCuentaBancaria().getUsuario());
 
             if (ok) {

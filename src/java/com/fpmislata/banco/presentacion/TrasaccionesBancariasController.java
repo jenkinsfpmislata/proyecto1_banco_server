@@ -89,7 +89,7 @@ public class TrasaccionesBancariasController {
                BussinesMessage bussinesMessage = new BussinesMessage(datos,mensage);
                errorList.add(bussinesMessage);
             }
-            String jsonInsert = jackson.writeValueAsString(errorList);
+            jackson.writeValueAsString(errorList);
             noCache(httpServletResponse);
             httpServletResponse.setStatus(httpServletResponse.SC_BAD_REQUEST);
         } catch (Exception ex) {
